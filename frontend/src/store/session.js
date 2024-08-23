@@ -15,7 +15,7 @@ const removeUser = () => {
     type: REMOVE_USER
   };
 };
-
+/// SIGNUP THUNK DISPATCHES TO SETUSER THEN TO THE REDUCER
 export const signup = (user) => async (dispatch) => {
   const { username, firstName, lastName, email, password } = user;
   const response = await csrfFetch("/api/users", {
@@ -33,13 +33,14 @@ export const signup = (user) => async (dispatch) => {
   return response;
 };
 
+/// GRABS THE EXISTING SESSION FROM TEH DB THEN DISPATCHES TO SET USER
 export const restoreUser = () => async (dispatch) => {
   const response = await csrfFetch("/api/session");
   const data = await response.json();
   dispatch(setUser(data.user));
   return response;
 };
-
+// LOGS THE USER IN THEN DISPATCHES TO SET USER
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
   const response = await csrfFetch("/api/session", {
@@ -51,6 +52,14 @@ export const login = (user) => async (dispatch) => {
   });
   const data = await response.json();
   dispatch(setUser(data.user));
+  return response;
+};
+// DELETES THE SESSION FROM THE DB THEN DISPATCHES TO REMOVE USER
+export const logout = () => async (dispatch) => {
+  const response = await csrfFetch('/api/session', {
+    method: 'DELETE'
+  });
+  dispatch(removeUser());
   return response;
 };
 
