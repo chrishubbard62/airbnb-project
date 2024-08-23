@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import './index.css'
+import SpotsContainer from './components/SpotsContainer';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1>Welcome!</h1>
+        element: <SpotsContainer />
       }
     ]
   }

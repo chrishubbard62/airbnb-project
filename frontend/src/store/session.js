@@ -33,7 +33,7 @@ export const signup = (user) => async (dispatch) => {
   return response;
 };
 
-/// GRABS THE EXISTING SESSION FROM TEH DB THEN DISPATCHES TO SET USER
+/// GRABS THE EXISTING SESSION FROM THE DB THEN DISPATCHES TO SET USER
 export const restoreUser = () => async (dispatch) => {
   const response = await csrfFetch("/api/session");
   const data = await response.json();
