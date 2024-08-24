@@ -13,7 +13,6 @@ function SpotsContainer() {
 
   useEffect(() => {
     dispatch(getSpotsThunk())
-
   }, [dispatch])
 
   return (

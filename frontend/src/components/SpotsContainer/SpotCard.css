@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 400px;
   text-decoration: none;
+  margin-bottom: 10px;
 }
 
 .spot-card-image{
@@ -12,4 +13,9 @@
 .state-stars{
   display: flex;
   justify-content: space-between;
+  padding: 0px 10px 0px 10px;
+}
+
+.price {
+  padding-left: 10px
 }
