@@ -1,0 +1,15 @@
+.spot-card {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  text-decoration: none;
+}
+
+.spot-card-image{
+  border-radius: 15px;
+}
+
+.state-stars{
+  display: flex;
+  justify-content: space-between;
+}

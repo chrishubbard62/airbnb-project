@@ -1,8 +1,10 @@
-import { Link } from "react-router-dom";
+
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getSpotsThunk } from "../../store/spots";
+import SpotCard from "./SpotCard";
+import './SpotContainer.css'
 
 function SpotsContainer() {
   const data = useSelector(state => state.spots)
@@ -17,14 +19,13 @@ function SpotsContainer() {
   return (
     <>
       <h1>WELCOME TO BIKE BNB</h1>
-      <ul>
-      {spots?.map(({id, description}) => {
+      <div className="card-container" style={{}}>
+      {spots?.map((spot) => {
         return (
-          <li key={`${id}`}>{description}</li>
+          <SpotCard key={`${spot.id}`} spot={spot}/>
         )
       })}
-      </ul>
-
+      </div>
     </>
   )
 

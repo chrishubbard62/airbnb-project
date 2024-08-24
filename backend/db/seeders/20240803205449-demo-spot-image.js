@@ -11,29 +11,44 @@ module.exports = {
     await SpotImage.bulkCreate([
       {
         spotId: 1,
-        url: 'https://example.com/beach.jpg',
+        url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
         preview: true,
       },
       {
         spotId: 1,
-        url: 'https://example.com/beach2.jpg',
+        url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
         preview: false,
       },
       {
         spotId: 2,
-        url: 'https://example.com/mountain.jpg',
+        url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
         preview: true,
       },
       {
         spotId: 2,
-        url: 'https://example.com/mountain2.jpg',
+        url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
         preview: false,
       },
       {
         spotId: 3,
-        url: 'https://example.com/lake.jpg',
+        url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
         preview: true,
-      }
+      },
+      {
+        spotId: 4,
+        url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
+        preview: true,
+      },
+      {
+        spotId: 5,
+        url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
+        preview: true,
+      },
+      {
+        spotId: 6,
+        url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
+        preview: true,
+      },
     ], {validate: true})
 
   },
