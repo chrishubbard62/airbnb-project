@@ -1,6 +1,6 @@
 // frontend/src/components/Navigation/Navigation.jsx
 
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
@@ -10,7 +10,7 @@ function Navigation({ isLoaded }) {
   return (
       <ul className='nav'>
         <li>
-          <NavLink to="/"><img className='logo' src="../../../images/logo.jpg" alt="" /></NavLink>
+          <Link  to="/"><img className='logo' src="../../../images/logo.jpg" alt="" /></Link>
         </li>
         {isLoaded && (
           <li>
