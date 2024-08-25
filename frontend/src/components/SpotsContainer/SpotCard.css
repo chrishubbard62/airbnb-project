@@ -4,10 +4,29 @@
   width: 400px;
   text-decoration: none;
   margin-bottom: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.star {
+  color: black
+}
+
+.spot-card span {
+  color:black;
+  display: none;
+  position: absolute;
+  border-radius: 10px;
+  font-size: larger;
+  padding: 10px;
+  background-color: grey;
+}
+
+.spot-card:hover span {
+  display: block;
 }
 
 .spot-card-image{
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .state-stars{
