@@ -53,8 +53,8 @@ function SignupFormModal() {
   }, [email, username, firstName, lastName, password, confirmPassword])
 
   return (
-    <>
-      <h1>Sign Up</h1>
+    <div className='modal-container'>
+      <h1 style={{textAlign: 'center'}}>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <label>
           Email
@@ -120,7 +120,7 @@ function SignupFormModal() {
         )}
         <button disabled={disabled} type="submit">Sign Up</button>
       </form>
-    </>
+    </div>
   );
 }
 
