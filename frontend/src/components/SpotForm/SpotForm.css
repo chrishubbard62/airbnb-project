@@ -1,0 +1,11 @@
+.errors {
+  color: red
+}
+
+.hide {
+  color: white;
+}
+
+textarea {
+  height: 10rem;;
+}
