@@ -2,11 +2,11 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getSpotDetailsThunk } from "../../store/spotdetails";
+import { getSpotDetailsThunk } from "../../store/spots";
 
 
 function SpotDetailsContainer() {
-  const spotDetails = useSelector(state => state.spotDetails)
+  const spotDetails = useSelector(state => state.spots)
   const {spotId} = useParams();
   const dispatch = useDispatch();
   const spot = spotDetails[spotId]
@@ -15,7 +15,7 @@ function SpotDetailsContainer() {
   useEffect(() => {
     dispatch(getSpotDetailsThunk(spotId))
   }, [dispatch, spotId])
-  if(!spot) return <h2>Loading</h2>
+  if(!spot || !spot.SpotImages) return <h2>Loading</h2>
 
   const PreviewImage = spot.SpotImages.find((img) => img.preview === true )
   const thumbnails = spot.SpotImages.filter((img) => img.preview === false)
