@@ -135,7 +135,6 @@ function SpotForm() {
       <input
         value={price}
         onChange={(e) => setPrice(e.target.value)}
-        min={.01}
         type="number"
         name="price"
         placeholder="Price per night (USD)" />
