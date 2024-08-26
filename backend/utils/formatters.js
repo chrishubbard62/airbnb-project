@@ -27,6 +27,7 @@ function avgRatingFormatter(spot) {
   } else {
     spot.dataValues.avgRating = 'NEW!'
   }
+  spot.dataValues.numReviews = count
   delete spot.dataValues.Reviews;
   return spot
 }

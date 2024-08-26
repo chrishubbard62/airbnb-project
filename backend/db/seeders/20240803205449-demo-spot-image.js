@@ -20,6 +20,21 @@ module.exports = {
         preview: false,
       },
       {
+        spotId: 1,
+        url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
+        preview: false,
+      },
+      {
+        spotId: 1,
+        url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
+        preview: false,
+      },
+      {
+        spotId: 1,
+        url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
+        preview: false,
+      },
+      {
         spotId: 2,
         url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
         preview: true,

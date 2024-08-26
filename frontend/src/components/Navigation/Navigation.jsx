@@ -13,9 +13,13 @@ function Navigation({ isLoaded }) {
           <Link  to="/"><img className='logo' src="../../../images/logo.jpg" alt="" />BNB</Link>
         </li>
         {isLoaded && (
-          <li>
+          <div className='right-nav'>
+            {sessionUser && <li id='create'><Link to='/spots/new'>Create a New Spot</Link></li>}
+            <li>
             <ProfileButton user={sessionUser} />
-          </li>
+            </li>
+          </div>
+
         )}
       </ul>
 

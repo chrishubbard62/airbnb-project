@@ -41,6 +41,14 @@
 
 }
 
+#create {
+  padding-right: 20px;
+}
+
+.right-nav {
+  display: flex;
+}
+
 /* .drop-down {
   position: absolute;
   top: 65px;
