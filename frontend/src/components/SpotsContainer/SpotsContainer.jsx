@@ -6,17 +6,24 @@ import { getSpotsThunk } from "../../store/spots";
 import SpotCard from "./SpotCard";
 import './SpotContainer.css'
 
-function SpotsContainer() {
+function SpotsContainer(props) {
   const data = useSelector(state => state.spots)
+  const session = useSelector(state => state.session)
   const dispatch = useDispatch();
-  const spots = Object.values(data)
+  let spots = Object.values(data)
+  const {current} = props
+  if(current) {
+    spots = spots.filter((spot) => spot.ownerId === session.user.id)
+  }
+
 
   useEffect(() => {
-    dispatch(getSpotsThunk())
-  }, [dispatch])
+      dispatch(getSpotsThunk())
+  }, [dispatch, current])
 
   return (
     <>
+    {console.log(current)}
       <h1>WELCOME TO BIKE BNB</h1>
       <div className="card-container" style={{}}>
       {spots?.map((spot) => {

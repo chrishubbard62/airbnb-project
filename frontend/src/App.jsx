@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <SpotsContainer />
+        element: <SpotsContainer current={false}/>
       },
       {
         path: '/:spotId',
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/spots/current',
-        element: <h1>Hello</h1>
+        element: <SpotsContainer current={true} />
       }
     ]
   }
