@@ -16,15 +16,16 @@ function SpotDetailsContainer() {
     dispatch(getSpotDetailsThunk(spotId))
   }, [dispatch, spotId])
   if(!spot || !spot.SpotImages) return <h2>Loading</h2>
+  console.log(spot)
 
-  const PreviewImage = spot.SpotImages.find((img) => img.preview === true )
+  
   const thumbnails = spot.SpotImages.filter((img) => img.preview === false)
 
   return (
     <div>
       <h2>{spot.name}</h2>
       <p>{spot.city}, {spot.state}, {spot.country}</p>
-      <img style={{width: 500}} src={PreviewImage.url} alt={`${spot.name}`} />
+      <img style={{width: 500}} src={spot.previewImage} alt={`${spot.name}`} />
       {thumbnails.map((img) => {
         return (
           <img className='thumbnail' style={{width: 100}}key={img.id} src={img.url} alt={`${spot.name} image ${img.id}`}/>
