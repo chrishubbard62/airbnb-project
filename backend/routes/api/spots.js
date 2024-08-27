@@ -349,7 +349,8 @@ router.get('/', validateQuery, async (req, res, next) => {
 
 //POST A NEW SPOT
 router.post('/', requireAuth, validateSpot, async(req, res, next) => {
-  const {address, city, state, country, lat, lng, name, description, price} = req.body;
+  const {address, city, state, country, lat, lng, name, description, price, prevImage} = req.body;
+  console.log(prevImage)
   const ownerID = req.user.id;
   const user = await User.findByPk(ownerID);
   const newSpot = await user.createSpot({
@@ -363,6 +364,8 @@ router.post('/', requireAuth, validateSpot, async(req, res, next) => {
     description,
     price
   })
+  const image = await newSpot.createSpotImage({url: prevImage, preview: true})
+  newSpot.dataValues.previewImage = image.url
   return res.status(201).json(newSpot);
 })
 

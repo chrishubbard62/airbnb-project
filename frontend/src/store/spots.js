@@ -30,24 +30,13 @@ export const getSpotDetailsThunk = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}`)
 
   if(res.ok) {
-    const data = await res.json()
-    dispatch(getSpot(data))
-    return data;
+    const spot = await res.json()
+    dispatch(getSpot(spot))
+    return spot;
   }
 }
-///NEEDS WORK
-// export const addPreviewImageThunk = (spotId, image) => async (dispatch) => {
-//   const res = await csrfFetch(`/api/${spotId}/images`, {
-//     method: 'POST',
-//     body: JSON.stringify(image),
-//     headers: {'Content-Type': 'application/json'}
-//   })
-//   if(res.ok) {
-//     const image = await res.json();
-//     return image;
-//   }
-// }
-///NEEDS WORK
+
+
 export const createSpotThunk = (spot) => async (dispatch) => {
   const res = await csrfFetch('/api/spots', {
     method: 'POST',
@@ -56,8 +45,7 @@ export const createSpotThunk = (spot) => async (dispatch) => {
   })
   if(res.ok) {
     const newSpot = await res.json();
-    // const image = await addPreviewImageThunk(newSpot.id, {url: spot.prevImage, preview: true})
-    // console.log(image)
+    console.log(newSpot)
     dispatch(createSpot(newSpot));
     return newSpot;
   }
@@ -76,6 +64,7 @@ const initialState = {}
 
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
+
     case GET_ALL_SPOTS: {
       const newState = {...state}
       action.payload.forEach((spot) => {

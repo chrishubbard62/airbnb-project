@@ -4,9 +4,7 @@ import { useDispatch } from "react-redux"
 import './SpotForm.css'
 import { createSpotThunk } from "../../store/spots"
 
-
 const ENDINGS = ['.png', '.jpg', '.jpeg']
-
 
 function SpotForm() {
   const navigate = useNavigate();
@@ -25,7 +23,6 @@ function SpotForm() {
   const [valErrors, setValErrors] = useState({})
   const [createToggle, setCreateToggle] = useState(true)
 
-
   useEffect(() => {
     const errors = {}
     if (country.length < 1) errors.country = 'Country is required'
@@ -37,10 +34,10 @@ function SpotForm() {
     if (description.length < 30) errors.description = 'description needs to be a minimum of 30 characters'
     if (name.length < 1) errors.name = 'Name is required'
     if (price < .01) errors.price = 'Price must be greater than $0'
-
     if (!ENDINGS.some((ending) => prevImage.endsWith(ending))) errors.prevImage = 'Image URL must end with .png .jpg, or .jpeg'
     if (prevImage.length < 1) errors.prevImage = 'Preview image is required'
     if (!Object.values(errors).length) setCreateToggle(false)
+
     setValErrors(errors)
   }, [country, address, city, state, description, name, price, prevImage, lat, lng])
 
@@ -60,7 +57,6 @@ function SpotForm() {
       }
       const newSpot =  await dispatch(createSpotThunk(spot))
       navigate(`/${newSpot.id}`)
-
     }
 
   return (
