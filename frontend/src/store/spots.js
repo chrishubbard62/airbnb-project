@@ -6,6 +6,7 @@ const GET_SPOT = 'spot/getSpot'
 const CREATE_SPOT = 'spots/createSpot'
 const UPDATE_SPOT = 'spots/updateSpot'
 
+
 const updateSpot = (payload) => {
   return {
     type: UPDATE_SPOT,

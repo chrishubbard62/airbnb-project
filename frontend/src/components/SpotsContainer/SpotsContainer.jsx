@@ -38,7 +38,7 @@ function SpotsContainer(props) {
       <div className="card-container" style={{}}>
       {spots?.map((spot) => {
         return (
-          <SpotCard key={`${spot.id}`} spot={spot} current={current}/>
+          <SpotCard key={`${spot.id}`} spot={spot} current={current} spotId={spot.id}/>
         )
       })}
       </div>

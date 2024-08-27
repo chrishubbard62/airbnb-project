@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import OpenModalButton from '../OpenModalButton'
+import DeleteModal from './DeleteModal';
 
 function SpotCard(props) {
-  const { spot, current } = props;
+  const { spot, current, spotId } = props;
   const navigate = useNavigate();
 
   const handleUpdate = () => navigate(`/spots/${spot.id}/edit`)
@@ -27,7 +28,7 @@ function SpotCard(props) {
       <div className='button-box'>
        <button onClick={handleUpdate}>Update</button>
        <OpenModalButton
-        modalComponent={<h1>THIS IS WORKING</h1>}
+        modalComponent={<DeleteModal spotId={spotId}/>}
         buttonText={'Delete'}
         />
       </div>
