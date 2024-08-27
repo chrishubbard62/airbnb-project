@@ -11,14 +11,15 @@ const ENDINGS = ['.png', '.jpg', '.jpeg']
 function SpotForm(props) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {newSpot} = props;
-  const {id} = useParams()
+  const { newSpot } = props;
+  const { id } = useParams()
   const spot = useSelector(state => state.spots[id]);
+  console.log(newSpot)
 
   const [country, setCountry] = useState(spot?.country || '')
   const [address, setAddress] = useState(spot?.address || '')
   const [city, setCity] = useState(spot?.city || '')
-  const [state, setState] = useState(spot?.state ||'')
+  const [state, setState] = useState(spot?.state || '')
   const [lat, setLat] = useState(spot?.lat || '')
   const [lng, setLng] = useState(spot?.lng || '')
   const [description, setDescription] = useState(spot?.description || '')
@@ -29,17 +30,32 @@ function SpotForm(props) {
   const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
-    if(spot) {
-    const {country, address, city, state, lat, lng, description, name, price} = spot;
-    setCountry(country)
-    setAddress(address)
-    setCity(city)
-    setState(state)
-    setLat(lat)
-    setLng(lng)
-    setDescription(description)
-    setName(name)
-    setPrice(price)
+    if (newSpot) {
+      setCountry('')
+      setAddress('')
+      setCity('')
+      setState('')
+      setLat('')
+      setLng('')
+      setDescription('')
+      setName('')
+      setPrice(0)
+    }
+  }, [newSpot])
+
+
+  useEffect(() => {
+    if (spot) {
+      const { country, address, city, state, lat, lng, description, name, price } = spot;
+      setCountry(country)
+      setAddress(address)
+      setCity(city)
+      setState(state)
+      setLat(lat)
+      setLng(lng)
+      setDescription(description)
+      setName(name)
+      setPrice(price)
     }
   }, [spot])
 
@@ -56,9 +72,9 @@ function SpotForm(props) {
     if (address.length < 1) errors.address = 'Address is required'
     if (city.length < 1) errors.city = 'City is required'
     if (state.length < 1) errors.state = 'State is required'
-    if(lat.length < 1) errors.lat = 'Latitude is required'
-    if(lng.length < 1) errors.lng = 'Longitude is required'
-    if (lat <-90 || lat > 90) errors.lat = 'Latitude muse be between -90 and 90'
+    if (lat.length < 1) errors.lat = 'Latitude is required'
+    if (lng.length < 1) errors.lng = 'Longitude is required'
+    if (lat < -90 || lat > 90) errors.lat = 'Latitude muse be between -90 and 90'
     if (lng < -180 || lng > 180) errors.lng = 'Longitude must be between -180 and 180'
     if (description.length < 30) errors.description = 'description needs to be a minimum of 30 characters'
     if (name.length < 1) errors.name = 'Name is required'
@@ -69,44 +85,44 @@ function SpotForm(props) {
     setValErrors(errors)
   }, [country, address, city, state, description, name, price, prevImage, lat, lng, newSpot])
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      setSubmitted(true)
-      if(Object.values(valErrors).length) return;
-      const spot = {
-        address,
-        city,
-        state,
-        country,
-        lat,
-        lng,
-        name,
-        description,
-        price,
-        prevImage
-      }
-      const newSpot =  await dispatch(createSpotThunk(spot))
-      navigate(`/${newSpot.id}`)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitted(true)
+    if (Object.values(valErrors).length) return;
+    const spot = {
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price,
+      prevImage
     }
+    const newSpot = await dispatch(createSpotThunk(spot))
+    navigate(`/${newSpot.id}`)
+  }
 
-    const handleUpdate = async (e) => {
-      e.preventDefault();
-      setSubmitted(true)
-      if(Object.values(valErrors).length) return;
-      const spot = {
-        address,
-        city,
-        state,
-        country,
-        lat,
-        lng,
-        name,
-        description,
-        price
-      }
-      await dispatch(updateSpotThunk(id, spot))
-      navigate(`/${id}`)
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    setSubmitted(true)
+    if (Object.values(valErrors).length) return;
+    const spot = {
+      address,
+      city,
+      state,
+      country,
+      lat,
+      lng,
+      name,
+      description,
+      price
     }
+    await dispatch(updateSpotThunk(id, spot))
+    navigate(`/${id}`)
+  }
 
   return (
     <form className="new-spot-form" style={{ display: 'flex', flexDirection: 'column', width: 500 }}>
