@@ -2,6 +2,7 @@ import './SpotCard.css'
 import { Link } from 'react-router-dom'
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import OpenModalButton from '../OpenModalButton'
 
 function SpotCard(props) {
   const { spot, current } = props;
@@ -25,7 +26,10 @@ function SpotCard(props) {
       {current &&
       <div className='button-box'>
        <button onClick={handleUpdate}>Update</button>
-       <button>Delete</button>
+       <OpenModalButton
+        modalComponent={<h1>THIS IS WORKING</h1>}
+        buttonText={'Delete'}
+        />
       </div>
       }
     </div>

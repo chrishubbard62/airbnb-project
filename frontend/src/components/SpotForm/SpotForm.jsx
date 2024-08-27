@@ -2,22 +2,18 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import './SpotForm.css'
-import { createSpotThunk, getSpotsThunk } from "../../store/spots"
+import { createSpotThunk, getSpotsThunk, updateSpotThunk } from "../../store/spots"
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 
 const ENDINGS = ['.png', '.jpg', '.jpeg']
 
 function SpotForm(props) {
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {newSpot} = props;
-  const data = useSelector(state => state.spots);
   const {id} = useParams()
-
-  const spot = data[id];
-  console.log(spot)
+  const spot = useSelector(state => state.spots[id]);
 
   const [country, setCountry] = useState(spot?.country || '')
   const [address, setAddress] = useState(spot?.address || '')
@@ -33,12 +29,26 @@ function SpotForm(props) {
   const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
+    if(spot) {
+    const {country, address, city, state, lat, lng, description, name, price} = spot;
+    setCountry(country)
+    setAddress(address)
+    setCity(city)
+    setState(state)
+    setLat(lat)
+    setLng(lng)
+    setDescription(description)
+    setName(name)
+    setPrice(price)
+    }
+  }, [spot])
+
+  useEffect(() => {
     async function getSpots() {
       await dispatch(getSpotsThunk());
     }
     getSpots()
   }, [dispatch])
-
 
   useEffect(() => {
     const errors = {}
@@ -46,12 +56,14 @@ function SpotForm(props) {
     if (address.length < 1) errors.address = 'Address is required'
     if (city.length < 1) errors.city = 'City is required'
     if (state.length < 1) errors.state = 'State is required'
+    if(lat.length < 1) errors.lat = 'Latitude is required'
+    if(lng.length < 1) errors.lng = 'Longitude is required'
     if (lat <-90 || lat > 90) errors.lat = 'Latitude muse be between -90 and 90'
     if (lng < -180 || lng > 180) errors.lng = 'Longitude must be between -180 and 180'
     if (description.length < 30) errors.description = 'description needs to be a minimum of 30 characters'
     if (name.length < 1) errors.name = 'Name is required'
     if (price < .01) errors.price = 'Price must be greater than $0'
-    if (newSpot && ENDINGS.some((ending) => prevImage.endsWith(ending))) errors.prevImage = 'Image URL must end with .png .jpg, or .jpeg'
+    if (newSpot && !ENDINGS.some((ending) => prevImage.endsWith(ending))) errors.prevImage = 'Image URL must end with .png .jpg, or .jpeg'
     if (newSpot && prevImage.length < 1) errors.prevImage = 'Preview image is required'
 
     setValErrors(errors)
@@ -76,6 +88,7 @@ function SpotForm(props) {
       const newSpot =  await dispatch(createSpotThunk(spot))
       navigate(`/${newSpot.id}`)
     }
+
     const handleUpdate = async (e) => {
       e.preventDefault();
       setSubmitted(true)
@@ -91,7 +104,8 @@ function SpotForm(props) {
         description,
         price
       }
-      console.log('in here' , spot)
+      await dispatch(updateSpotThunk(id, spot))
+      navigate(`/${id}`)
     }
 
   return (
