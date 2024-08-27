@@ -2,26 +2,43 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import './SpotForm.css'
-import { createSpotThunk } from "../../store/spots"
+import { createSpotThunk, getSpotsThunk } from "../../store/spots"
+import { useSelector } from "react-redux"
+import { useParams } from "react-router-dom"
 
 const ENDINGS = ['.png', '.jpg', '.jpeg']
 
-function SpotForm() {
+function SpotForm(props) {
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [country, setCountry] = useState('')
-  const [address, setAddress] = useState('')
-  const [city, setCity] = useState('')
-  const [state, setState] = useState('')
-  const [lat, setLat] = useState(0)
-  const [lng, setLng] = useState(0)
-  const [description, setDescription] = useState('')
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState(0);
+  const {newSpot} = props;
+  const data = useSelector(state => state.spots);
+  const {id} = useParams()
+
+  const spot = data[id];
+  console.log(spot)
+
+  const [country, setCountry] = useState(spot?.country || '')
+  const [address, setAddress] = useState(spot?.address || '')
+  const [city, setCity] = useState(spot?.city || '')
+  const [state, setState] = useState(spot?.state ||'')
+  const [lat, setLat] = useState(spot?.lat || '')
+  const [lng, setLng] = useState(spot?.lng || '')
+  const [description, setDescription] = useState(spot?.description || '')
+  const [name, setName] = useState(spot?.name || '');
+  const [price, setPrice] = useState(spot?.price || 0);
   const [prevImage, setPrevImage] = useState('')
-  /// set up additional images in the future
   const [valErrors, setValErrors] = useState({})
-  const [createToggle, setCreateToggle] = useState(true)
+  const [submitted, setSubmitted] = useState(false)
+
+  useEffect(() => {
+    async function getSpots() {
+      await dispatch(getSpotsThunk());
+    }
+    getSpots()
+  }, [dispatch])
+
 
   useEffect(() => {
     const errors = {}
@@ -34,15 +51,16 @@ function SpotForm() {
     if (description.length < 30) errors.description = 'description needs to be a minimum of 30 characters'
     if (name.length < 1) errors.name = 'Name is required'
     if (price < .01) errors.price = 'Price must be greater than $0'
-    if (!ENDINGS.some((ending) => prevImage.endsWith(ending))) errors.prevImage = 'Image URL must end with .png .jpg, or .jpeg'
-    if (prevImage.length < 1) errors.prevImage = 'Preview image is required'
-    if (!Object.values(errors).length) setCreateToggle(false)
+    if (newSpot && ENDINGS.some((ending) => prevImage.endsWith(ending))) errors.prevImage = 'Image URL must end with .png .jpg, or .jpeg'
+    if (newSpot && prevImage.length < 1) errors.prevImage = 'Preview image is required'
 
     setValErrors(errors)
-  }, [country, address, city, state, description, name, price, prevImage, lat, lng])
+  }, [country, address, city, state, description, name, price, prevImage, lat, lng, newSpot])
 
     const handleSubmit = async (e) => {
       e.preventDefault();
+      setSubmitted(true)
+      if(Object.values(valErrors).length) return;
       const spot = {
         address,
         city,
@@ -58,14 +76,31 @@ function SpotForm() {
       const newSpot =  await dispatch(createSpotThunk(spot))
       navigate(`/${newSpot.id}`)
     }
+    const handleUpdate = async (e) => {
+      e.preventDefault();
+      setSubmitted(true)
+      if(Object.values(valErrors).length) return;
+      const spot = {
+        address,
+        city,
+        state,
+        country,
+        lat,
+        lng,
+        name,
+        description,
+        price
+      }
+      console.log('in here' , spot)
+    }
 
   return (
     <form className="new-spot-form" style={{ display: 'flex', flexDirection: 'column', width: 500 }}>
-      <h2>Create a new Spot</h2>
+      {newSpot ? <h2>Create a new Spot</h2> : <h2>Update your Spot</h2>}
       <p>Where&apos;s your place located? Guests will only get your exact address once they booked a reservation.</p>
       <div>
         <label htmlFor="country">Country</label>
-        {valErrors.country && <span className="errors"> {valErrors.country}</span>}
+        {submitted && valErrors.country && <span className="errors"> {valErrors.country}</span>}
       </div>
       <input
         value={country}
@@ -75,7 +110,7 @@ function SpotForm() {
         name="country" />
       <div>
         <label htmlFor="address">Street Address</label>
-        {valErrors.address && <span className="errors"> {valErrors.address}</span>}
+        {submitted && valErrors.address && <span className="errors"> {valErrors.address}</span>}
       </div>
       <input
         value={address}
@@ -85,7 +120,7 @@ function SpotForm() {
         name="address" />
       <div>
         <label htmlFor="city">City</label>
-        {valErrors.city && <span className="errors"> {valErrors.city}</span>}
+        {submitted && valErrors.city && <span className="errors"> {valErrors.city}</span>}
       </div>
       <input
         value={city}
@@ -95,7 +130,7 @@ function SpotForm() {
         name="city" />
       <div>
         <label htmlFor="state">State</label>
-        {valErrors.state && <span className="errors"> {valErrors.state}</span>}
+        {submitted && valErrors.state && <span className="errors"> {valErrors.state}</span>}
       </div>
       <input
         value={state}
@@ -105,7 +140,7 @@ function SpotForm() {
         name="state" />
       <div>
         <label htmlFor="latitude">Latitude</label>
-        {valErrors.lat && <span className="errors"> {valErrors.lat}</span>}
+        {submitted && valErrors.lat && <span className="errors"> {valErrors.lat}</span>}
       </div>
       <input
         value={lat}
@@ -115,7 +150,7 @@ function SpotForm() {
       />
       <div>
         <label htmlFor="longitude">Longitude</label>
-        {valErrors.lng && <span className="errors"> {valErrors.lng}</span>}
+        {submitted && valErrors.lng && <span className="errors"> {valErrors.lng}</span>}
       </div>
       <input
         value={lng}
@@ -123,7 +158,6 @@ function SpotForm() {
         type="number"
         name="longitude"
       />
-
       <h3>Describe your place to guests</h3>
       <p>Mention the best features of your space, any special amentities like
         fast wifi or parking, and what you love about the neighborhood.</p>
@@ -134,7 +168,7 @@ function SpotForm() {
         name="description"
         id="">
       </textarea>
-      {valErrors.description ? <div className="errors">{valErrors.description}</div> : <div className="hide">Validated</div>}
+      {submitted && valErrors.description ? <div className="errors">{valErrors.description}</div> : <div className="hide">Validated</div>}
       <h3>Create a title for your spot</h3>
       <p>Catch guests&apos; attention with a spot title that highlights what makes
         your place special.</p>
@@ -144,7 +178,7 @@ function SpotForm() {
         placeholder="Name of your spot"
         type="text"
         name="name" />
-      {valErrors.name ? <div className="errors">{valErrors.name}</div> : <div className="hide">Validated</div>}
+      {submitted && valErrors.name ? <div className="errors">{valErrors.name}</div> : <div className="hide">Validated</div>}
       <h3>Set a base price for your spot</h3>
       <p>Competitive pricing can help your listing stand out and rank higher
         in search results.</p>
@@ -156,30 +190,28 @@ function SpotForm() {
           name="price"
           placeholder="Price per night (USD)" />
       </label>
-      {valErrors.price ? <div className="errors">{valErrors.price}</div> : <div className="hide">Validated</div>}
+      {submitted && valErrors.price ? <div className="errors">{valErrors.price}</div> : <div className="hide">Validated</div>}
       <h3>Liven up your spot with photos</h3>
       <p>Submit a link to at least one photo to publish your spot</p>
       <input
+        disabled={!newSpot}
         value={prevImage}
         onChange={(e) => setPrevImage(e.target.value)}
         type="text"
         name='preview'
-        placeholder="Preview Image URL" />
-      {valErrors.prevImage ? <div className="errors">{valErrors.prevImage}</div> : <div className="hide">Validated</div>}
+        placeholder={newSpot ? "Preview Image URL" : "Feature Coming Soon"} />
+      {submitted && valErrors.prevImage ? <div className="errors">{valErrors.prevImage}</div> : <div className="hide">Validated</div>}
       <input type="text" name='image' placeholder="Feature Coming Soon" disabled={true} />
       {<div className='hide'>Validated</div>}
       <input type="text" name='image' placeholder="Feature Coming Soon" disabled={true} />
       {<div className='hide'>Validated</div>}
       <input type="text" name='image' placeholder="Feature Coming Soon" disabled={true} />
       {<div className='hide'>Validated</div>}
-      <hr />
-      <button
-        disabled={createToggle}
-        onClick={handleSubmit}
-      >Create Spot</button>
+      {
+        newSpot ? <button onClick={handleSubmit}>Create Spot</button> : <button onClick={handleUpdate}>Update</button>
+      }
     </form>
   )
-
 }
 
 export default SpotForm

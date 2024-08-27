@@ -1,18 +1,35 @@
 import './SpotCard.css'
 import { Link } from 'react-router-dom'
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
-function SpotCard({spot}) {
+function SpotCard(props) {
+  const { spot, current } = props;
+  const navigate = useNavigate();
+
+  const handleUpdate = () => navigate(`/spots/${spot.id}/edit`)
+
+
+
   return (
-    <Link to={`/${spot.id}`} className="spot-card">
-      <img className='spot-card-image' src={spot.previewImage} alt={`${spot.description}`}/>
-      <span className='tool-tip'>{spot.name}</span>
-      <div className='state-stars'>
-        <div>{spot.city}, {spot.state}</div>
-        <div>{spot.avgRating !== 'NEW!' && <FaStar className='star'/>}{spot.avgRating}</div>
+    <div>
+      <Link to={`/${spot.id}`} className="spot-card">
+        <img className='spot-card-image' src={spot.previewImage} alt={`${spot.description}`} />
+        <span className='tool-tip'>{spot.name}</span>
+        <div className='state-stars'>
+          <div>{spot.city}, {spot.state}</div>
+          <div>{spot.avgRating !== 'NEW!' && <FaStar className='star' />}{spot.avgRating}</div>
+        </div>
+        <div className='price'>${spot.price.toFixed(2)}/Night</div>
+      </Link>
+      {current &&
+      <div className='button-box'>
+       <button onClick={handleUpdate}>Update</button>
+       <button>Delete</button>
       </div>
-      <div className='price'>${spot.price.toFixed(2)}/Night</div>
-    </Link>
+      }
+    </div>
+
   )
 
 }
