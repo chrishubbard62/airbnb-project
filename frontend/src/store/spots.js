@@ -5,7 +5,7 @@ const GET_ALL_SPOTS = 'spots/getAllSpots'
 const GET_SPOT = 'spot/getSpot'
 const CREATE_SPOT = 'spots/createSpot'
 const UPDATE_SPOT = 'spots/updateSpot'
-const DELETE_SPOT = 'spots/delete'
+const DELETE_SPOT = 'spots/deleteSpot'
 
 const deleteSpot = (payload) => {
   return {
@@ -119,6 +119,7 @@ const spotsReducer = (state = initialState, action) => {
         newState[action.payload.id] = {...state[action.payload.id], ...action.payload}
       } else {
         newState[action.payload.id] = action.payload;
+        newState[action.payload.id].previewImage = newState[action.payload.id].SpotImages.find(image => image.preview).url
       }
       return newState
     }

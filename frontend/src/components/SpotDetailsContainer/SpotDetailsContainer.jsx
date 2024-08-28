@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSpotDetailsThunk } from "../../store/spots";
+import ReviewsContainer from "../ReviewsContainer";
 
 
 function SpotDetailsContainer() {
@@ -16,9 +17,8 @@ function SpotDetailsContainer() {
     dispatch(getSpotDetailsThunk(spotId))
   }, [dispatch, spotId])
   if(!spot || !spot.SpotImages) return <h2>Loading</h2>
-  console.log(spot)
 
-  
+
   const thumbnails = spot.SpotImages.filter((img) => img.preview === false)
 
   return (
@@ -37,7 +37,8 @@ function SpotDetailsContainer() {
       <p>${spot.price.toFixed(2)}/night</p>
       <p>{spot.numReviews}reviews</p>
       <button>Reserve</button>
-
+      <hr />
+      <ReviewsContainer avgRating={spot.avgRating}/>
     </div>
 
   )

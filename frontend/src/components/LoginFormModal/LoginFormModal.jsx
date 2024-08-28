@@ -31,7 +31,6 @@ function LoginFormModal() {
   };
 
   useEffect(() => {
-    console.log('in use effect')
     credential.length > 3 && password.length > 5 ? setDisabled(false) : setDisabled(true)
   }, [credential, password])
 

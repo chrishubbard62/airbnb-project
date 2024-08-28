@@ -17,6 +17,7 @@ function SpotsContainer(props) {
   if(current) {
     spots = spots.filter((spot) => spot.ownerId === session.user.id)
   }
+  console.log('current' , current)
 
   useEffect(() => {
       dispatch(getSpotsThunk())

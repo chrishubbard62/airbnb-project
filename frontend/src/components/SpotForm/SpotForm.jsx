@@ -14,7 +14,7 @@ function SpotForm(props) {
   const { newSpot } = props;
   const { id } = useParams()
   const spot = useSelector(state => state.spots[id]);
-  console.log(newSpot)
+  
 
   const [country, setCountry] = useState(spot?.country || '')
   const [address, setAddress] = useState(spot?.address || '')
