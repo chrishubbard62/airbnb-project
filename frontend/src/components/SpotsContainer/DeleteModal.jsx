@@ -1,7 +1,11 @@
+import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { deleteSpotThunk } from "../../store/spots";
+
 
 function DeleteModal(props) {
   const {spotId} = props;
+  const dispatch = useDispatch();
   const {closeModal} = useModal();
   const handleNo = () => {
 
@@ -9,7 +13,8 @@ function DeleteModal(props) {
   }
 
   const handleYes = () => {
-    console.log(spotId)
+    dispatch(deleteSpotThunk(spotId))
+    closeModal();
   }
 
   return(<div>
@@ -19,5 +24,4 @@ function DeleteModal(props) {
         </div>
         )
 }
-
 export default DeleteModal;
