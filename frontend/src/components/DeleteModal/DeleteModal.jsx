@@ -4,23 +4,26 @@ import { deleteSpotThunk } from "../../store/spots";
 
 
 function DeleteModal(props) {
-  const {spotId} = props;
+  const {spotId, deleteType} = props;
   const dispatch = useDispatch();
   const {closeModal} = useModal();
   const handleNo = () => {
-
     closeModal();
   }
 
   const handleYes = () => {
-    dispatch(deleteSpotThunk(spotId))
+    if(deleteType === 'Spot') {
+      dispatch(deleteSpotThunk(spotId))
+    } else {
+      console.log('fuck yeah')
+    }
     closeModal();
   }
 
   return(<div>
           <h2>Confirm Delete</h2>
-          <button onClick={handleYes}>Yes (Delete Spot)</button>
-          <button onClick={handleNo}>No (Keep Spot)</button>
+          <button onClick={handleYes}>Yes {`(Delete ${deleteType})`}</button>
+          <button onClick={handleNo}>No {`(Keep ${deleteType})`}</button>
         </div>
         )
 }

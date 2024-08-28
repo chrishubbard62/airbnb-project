@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import OpenModalButton from '../OpenModalButton'
-import DeleteModal from './DeleteModal';
+import DeleteModal from '../DeleteModal';
 
 function SpotCard(props) {
   const { spot, current, spotId } = props;
@@ -28,7 +28,7 @@ function SpotCard(props) {
       <div className='button-box'>
        <button onClick={handleUpdate}>Update</button>
        <OpenModalButton
-        modalComponent={<DeleteModal spotId={spotId}/>}
+        modalComponent={<DeleteModal spotId={spotId} deleteType={'Spot'}/>}
         buttonText={'Delete'}
         />
       </div>

@@ -38,7 +38,7 @@ function SpotDetailsContainer() {
       <p>{spot.numReviews}reviews</p>
       <button>Reserve</button>
       <hr />
-      <ReviewsContainer avgRating={spot.avgRating}/>
+      <ReviewsContainer avgRating={spot.avgRating} ownerId={spot.Owner.id}/>
     </div>
 
   )
