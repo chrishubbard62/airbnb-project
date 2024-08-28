@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 import { getReviewsThunk } from "../../store/reviews";
 import {FaStar} from 'react-icons/fa'
 import ReviewCard from "./ReivewCard";
-// import OpenModalButton from "../OpenModalButton";
+import OpenModalButton from "../OpenModalButton";
+import ReviewFormModal from "../ReviewFormModal";
 
 
 function ReviewsContainer({avgRating, ownerId}) {
@@ -27,7 +28,10 @@ useEffect(() => {
       {session.user &&
         session.user?.id !== ownerId &&
         !reviews.some((review) => review.User.id === session.user?.id) &&
-        <button>Post Your Review</button>}
+        <OpenModalButton
+          modalComponent={<ReviewFormModal />}
+          buttonText={'Post Your Review'}
+        />}
       {reviews.map((review) =>
       <ReviewCard
         key={review.id}
