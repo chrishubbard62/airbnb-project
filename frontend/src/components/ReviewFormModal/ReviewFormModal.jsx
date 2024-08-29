@@ -3,19 +3,22 @@ import { useModal } from "../../context/Modal";
 import { createReviewThunk } from "../../store/reviews";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { FaStar } from "react-icons/fa";
+
 import './ReviewForm.css'
 
 function ReviewFormModal({spotId, setNewReview}) {
   const session = useSelector(state => state.session)
   const [review, setReview] = useState('')
-  const [stars, setStars] = useState(1)
+  const [stars, setStars] = useState(0)
   const [valErrors, setValErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const {closeModal} = useModal();
   const dispatch = useDispatch();
+  const [activeRating, setActiveRating] = useState(0)
 
 
-  console.log(session.user)
+
 
 
   useEffect(() => {
@@ -52,13 +55,52 @@ function ReviewFormModal({spotId, setNewReview}) {
           value={review}
           onChange={(e) => setReview(e.target.value)}
           />
-        <input
+        {/* <input
           type="number"
           name="stars"
           min={1}
           max={5}
           value={stars}
-          onChange={(e) => setStars(+e.target.value)}/>
+          onChange={(e) => setStars(+e.target.value)}/> */}
+          <div className="rating-input">
+            <span className={stars > 0 || activeRating > 0 ? 'filled' : 'empty'}>
+              <FaStar
+                onMouseEnter={() => setActiveRating(1)}
+                onMouseLeave={() => setActiveRating(stars)}
+                onClick={() => setStars(1)}
+              />
+            </span>
+            <span className={stars > 1 || activeRating > 1 ? 'filled' : 'empty'}>
+              <FaStar
+                onMouseEnter={() => setActiveRating(2)}
+                onMouseLeave={() => setActiveRating(stars)}
+                onClick={() => setStars(2)}
+              />
+            </span>
+            <span className={stars > 2 || activeRating > 2 ? 'filled' : 'empty'}>
+              <FaStar
+                onMouseEnter={() => setActiveRating(3)}
+                onMouseLeave={() => setActiveRating(stars)}
+                onClick={() => setStars(3)}
+              />
+            </span>
+            <span className={stars > 3 || activeRating > 3 ? 'filled' : 'empty'}>
+              <FaStar
+                onMouseEnter={() => setActiveRating(4)}
+                onMouseLeave={() => setActiveRating(stars)}
+                onClick={() => setStars(4)}
+              />
+            </span>
+            <span className={stars > 4 || activeRating > 4 ? 'filled' : 'empty'}>
+              <FaStar
+                onMouseEnter={() => setActiveRating(5)}
+                onMouseLeave={() => setActiveRating(stars)}
+                onClick={() => setStars(5)}
+              />
+            </span>
+            <label>Stars</label>
+          </div>
+
         <button className="review-button" disabled={review.length < 10}onClick={handleSubmit}>Submit your Review</button>
         {submitted && valErrors.review && <p className="errors">{valErrors.review}</p>}
         {submitted && valErrors.stars && <p className='errors'>{valErrors.stars}</p>}

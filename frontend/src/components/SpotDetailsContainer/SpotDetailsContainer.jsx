@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { getSpotDetailsThunk } from "../../store/spots";
 import ReviewsContainer from "../ReviewsContainer";
 import { FaStar } from "react-icons/fa";
+
 import './SpotDetails.css'
 
 

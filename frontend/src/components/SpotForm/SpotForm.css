@@ -7,8 +7,8 @@
 }
 
 textarea {
-  height: 10rem;;
-  
+  height: 10rem;
+  font-size: 1.1rem;
 }
 
 .new-spot-form {
@@ -34,4 +34,26 @@ textarea {
 .form-container {
   display: flex;
   justify-content: center;
+}
+
+.rating-input {
+  display: flex;
+  align-items: center;
+}
+
+.rating-input .filled {
+  color: rgb(243, 243, 24);
+}
+
+.rating-input .empty {
+  color: grey
+}
+
+.rating-input span {
+  font-size: 2rem;
+  padding: 10px;
+}
+
+.rating-input label {
+  font-size: 1.5rem;
 }
