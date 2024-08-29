@@ -7,6 +7,7 @@ import {FaStar} from 'react-icons/fa'
 import ReviewCard from "./ReviewCard";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../ReviewFormModal";
+import './Review.css'
 
 
 function ReviewsContainer({avgRating, ownerId, setNewReview}) {
@@ -27,13 +28,17 @@ useEffect(() => {
 if(!data) return <h2>Loading</h2>
 
   return (
-    <div className="Review-container">
+    <div className="review-container">
       <h2><FaStar/>{avgRating} · {reviews.length + `${reviews.length === 1 ? ' review': ' reviews'}`}</h2>
-
+      {
+        session.user &&
+        session.user?.id !== ownerId &&
+        !reviews?.length && <p>Be the first to post a review!</p>
+      }
       {session.user &&
         session.user?.id !== ownerId &&
         !reviews?.some((review) => review?.userId=== session.user?.id) &&
-        <OpenModalButton
+        <OpenModalButton className='post-review-button'
           modalComponent={<ReviewFormModal spotId={spotId} setNewReview={setNewReview}/>}
           buttonText={'Post Your Review'}
         />}

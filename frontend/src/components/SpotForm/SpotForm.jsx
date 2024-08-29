@@ -14,7 +14,7 @@ function SpotForm(props) {
   const { newSpot } = props;
   const { id } = useParams()
   const spot = useSelector(state => state.spots[id]);
-  
+
 
   const [country, setCountry] = useState(spot?.country || '')
   const [address, setAddress] = useState(spot?.address || '')
@@ -125,6 +125,7 @@ function SpotForm(props) {
   }
 
   return (
+    <div className="form-container">
     <form className="new-spot-form" style={{ display: 'flex', flexDirection: 'column', width: 500 }}>
       {newSpot ? <h2>Create a new Spot</h2> : <h2>Update your Spot</h2>}
       <p>Where&apos;s your place located? Guests will only get your exact address once they booked a reservation.</p>
@@ -238,9 +239,10 @@ function SpotForm(props) {
       <input type="text" name='image' placeholder="Feature Coming Soon" disabled={true} />
       {<div className='hide'>Validated</div>}
       {
-        newSpot ? <button onClick={handleSubmit}>Create Spot</button> : <button onClick={handleUpdate}>Update</button>
+        newSpot ? <button className="form-submit" onClick={handleSubmit}>Create Spot</button> : <button className="form-submit" onClick={handleUpdate}>Update</button>
       }
     </form>
+    </div>
   )
 }
 

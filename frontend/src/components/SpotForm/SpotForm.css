@@ -3,9 +3,35 @@
 }
 
 .hide {
-  color: white;
+  color: rgb(216, 216, 216);
 }
 
 textarea {
   height: 10rem;;
+  
+}
+
+.new-spot-form {
+  border: 2px solid black;
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 0px 10px 10px 10px;
+  background-color: rgb(216, 216, 216);
+}
+
+.form-submit {
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.form-submit:hover {
+  background-color: black;
+  color: white
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
 }

@@ -22,8 +22,6 @@
   cursor: pointer
 }
 
-
-
 .modal-container button {
   margin: 10px;
   border: 2px solid grey;
@@ -47,4 +45,15 @@ a {
 input {
   border-radius: 3px;
   margin: 2px
+}
+
+textarea {
+  border-radius: 3px;
+  border: 2px solid black;
+  margin: 2px
+}
+
+button:hover {
+  color: white;
+  background-color: black;
 }
