@@ -9,6 +9,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { RxHamburgerMenu } from "react-icons/rx";
 
 
 function ProfileButton({ user }) {
@@ -50,7 +51,7 @@ function ProfileButton({ user }) {
   return (
     <>
       <button className='user-toggle' onClick={toggleMenu}>
-        <FaUserCircle/>
+        <RxHamburgerMenu/><FaUserCircle/>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (

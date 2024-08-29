@@ -20,6 +20,7 @@ function ReviewCard({review}) {
         modalComponent={<DeleteModal reviewId={review.id} deleteType={'Review'}/>}
         buttonText={'Delete'}
       />}
+      <hr />
     </div>
 
   )

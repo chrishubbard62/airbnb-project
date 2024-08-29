@@ -16,6 +16,7 @@ function ReviewsContainer({avgRating, ownerId, setNewReview}) {
   const dispatch = useDispatch();
   const dataArray = Object.values(data)
   const reviews = dataArray.filter((review) => review.spotId === Number(spotId))
+  reviews.reverse();
 
 useEffect(() => {
     dispatch(getReviewsThunk(spotId))

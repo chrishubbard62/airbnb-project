@@ -1,10 +1,11 @@
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteSpotThunk } from "../../store/spots";
+import { deleteReviewThunk } from "../../store/reviews";
 
 
 function DeleteModal(props) {
-  const {spotId, deleteType} = props;
+  const {spotId, deleteType, reviewId} = props;
   const dispatch = useDispatch();
   const {closeModal} = useModal();
   const handleNo = () => {
@@ -15,7 +16,7 @@ function DeleteModal(props) {
     if(deleteType === 'Spot') {
       dispatch(deleteSpotThunk(spotId))
     } else {
-      console.log('fuck yeah')
+      dispatch(deleteReviewThunk(reviewId))
     }
     closeModal();
   }

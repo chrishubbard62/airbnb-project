@@ -30,6 +30,14 @@ function LoginFormModal() {
       });
   };
 
+  const handleDemo = async (e) => {
+    e.stopPropagation();
+    setErrors({})
+    await dispatch(sessionActions.login({credential: 'Demo-lition', password: 'password'}))
+    closeModal();
+  };
+
+
   useEffect(() => {
     credential.length > 3 && password.length > 5 ? setDisabled(false) : setDisabled(true)
   }, [credential, password])
@@ -40,7 +48,7 @@ function LoginFormModal() {
       <h1 style={{textAlign: 'center'}}>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Username or Email
+          <div>Username or Email</div>
           <input
             type="text"
             value={credential}
@@ -49,7 +57,7 @@ function LoginFormModal() {
           />
         </label>
         <label>
-          Password
+          <div>Password</div>
           <input
             type="password"
             value={password}
@@ -57,11 +65,13 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.credential && (
-          <p>{errors.credential}</p>
-        )}
         <button disabled={disabled} type="submit">Log In</button>
+        <div className='demo-login' onClick={handleDemo}>Log In as Demo User</div>
+        {errors.credential && (
+          <p className='errors'>{errors.credential}</p>
+        )}
       </form>
+      {/* <button onClick={handleDemo}>Log in as Demo User</button> */}
     </div>
   );
 }

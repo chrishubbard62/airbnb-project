@@ -57,7 +57,7 @@ function SignupFormModal() {
       <h1 style={{textAlign: 'center'}}>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Email
+          <div>Email</div>
           <input
             type="text"
             value={email}
@@ -65,9 +65,8 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
         <label>
-          Username
+          <div>Username</div>
           <input
             type="text"
             value={username}
@@ -75,9 +74,8 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
         <label>
-          First Name
+          <div>First Name</div>
           <input
             type="text"
             value={firstName}
@@ -85,9 +83,9 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.firstName && <p>{errors.firstName}</p>}
+
         <label>
-          Last Name
+          <div>Last Name</div>
           <input
             type="text"
             value={lastName}
@@ -95,9 +93,9 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.lastName && <p>{errors.lastName}</p>}
+
         <label>
-          Password
+          <div>Password</div>
           <input
             type="password"
             value={password}
@@ -105,9 +103,9 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+
         <label>
-          Confirm Password
+          <div>Confirm Password</div>
           <input
             type="password"
             value={confirmPassword}
@@ -115,10 +113,13 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.confirmPassword && (
-          <p>{errors.confirmPassword}</p>
-        )}
         <button disabled={disabled} type="submit">Sign Up</button>
+        {errors.email && <div className='errors'>{errors.email}</div>}
+        {errors.username && <div className='errors'>{errors.username}</div>}
+        {errors.firstName && <div className='errors'>{errors.firstName}</div>}
+        {errors.lastName && <div className='errors'>{errors.lastName}</div>}
+        {errors.confirmPassword && <div className='errors'>{errors.confirmPassword}</div>}
+        {errors.password && <div className='errors'>{errors.password}</div>}
       </form>
     </div>
   );
