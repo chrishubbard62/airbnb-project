@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { deleteSpotThunk } from "../../store/spots";
 import { deleteReviewThunk } from "../../store/reviews";
+import './DeleteModal.css'
 
 
 function DeleteModal(props) {
@@ -21,10 +22,10 @@ function DeleteModal(props) {
     closeModal();
   }
 
-  return(<div>
+  return(<div className="delete-container">
           <h2>Confirm Delete</h2>
-          <button onClick={handleYes}>Yes {`(Delete ${deleteType})`}</button>
-          <button onClick={handleNo}>No {`(Keep ${deleteType})`}</button>
+          <button className='yes-button'onClick={handleYes}>Yes {`(Delete ${deleteType})`}</button>
+          <button className='no-button' onClick={handleNo}>No {`(Keep ${deleteType})`}</button>
         </div>
         )
 }

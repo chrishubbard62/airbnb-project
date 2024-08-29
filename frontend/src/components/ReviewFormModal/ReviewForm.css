@@ -1,0 +1,16 @@
+.text-area {
+  width: 400px;
+  height: 250px;
+  border-radius: 5px;
+}
+
+.review-button {
+  height: 50px;
+  border-radius: 15px;
+}
+
+.review-button:disabled:hover {
+  color: black;
+  background-color: grey;
+  cursor: not-allowed
+}

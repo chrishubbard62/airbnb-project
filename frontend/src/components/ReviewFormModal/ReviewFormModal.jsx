@@ -3,10 +3,7 @@ import { useModal } from "../../context/Modal";
 import { createReviewThunk } from "../../store/reviews";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-
-
-
-
+import './ReviewForm.css'
 
 function ReviewFormModal({spotId, setNewReview}) {
   const session = useSelector(state => state.session)
@@ -49,6 +46,8 @@ function ReviewFormModal({spotId, setNewReview}) {
       <h2 style={{ textAlign: 'center' }}>How was your stay?</h2>
       <form>
         <textarea
+          className="text-area"
+          placeholder="Leave your review here..."
           name="review"
           value={review}
           onChange={(e) => setReview(e.target.value)}
@@ -60,7 +59,7 @@ function ReviewFormModal({spotId, setNewReview}) {
           max={5}
           value={stars}
           onChange={(e) => setStars(+e.target.value)}/>
-        <button onClick={handleSubmit}>Submit your Review</button>
+        <button className="review-button" disabled={review.length < 10}onClick={handleSubmit}>Submit your Review</button>
         {submitted && valErrors.review && <p className="errors">{valErrors.review}</p>}
         {submitted && valErrors.stars && <p className='errors'>{valErrors.stars}</p>}
       </form>

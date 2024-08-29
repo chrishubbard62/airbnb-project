@@ -14,7 +14,7 @@ function ReviewCard({review}) {
     <div>
       <h4>{review.User.firstName}</h4>
       <p>{MONTHS[month]} {year}</p>
-      <p>{review.review}</p>
+      <p className="review-text">{review.review}</p>
       {session.user?.id === review.User.id &&
       <OpenModalButton
         modalComponent={<DeleteModal reviewId={review.id} deleteType={'Review'}/>}
