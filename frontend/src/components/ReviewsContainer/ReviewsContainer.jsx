@@ -9,7 +9,7 @@ import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../ReviewFormModal";
 
 
-function ReviewsContainer({avgRating, ownerId}) {
+function ReviewsContainer({avgRating, ownerId, setNewReview}) {
   const {spotId} = useParams();
   const session = useSelector(state => state.session)
   const data = useSelector(state => state.reviews);
@@ -22,7 +22,8 @@ useEffect(() => {
   }, [dispatch, spotId])
 
 
-  if(!data) return <h2>Loading</h2>
+
+if(!data) return <h2>Loading</h2>
 
   return (
     <div className="Review-container">
@@ -32,7 +33,7 @@ useEffect(() => {
         session.user?.id !== ownerId &&
         !reviews?.some((review) => review?.userId=== session.user?.id) &&
         <OpenModalButton
-          modalComponent={<ReviewFormModal spotId={spotId}/>}
+          modalComponent={<ReviewFormModal spotId={spotId} setNewReview={setNewReview}/>}
           buttonText={'Post Your Review'}
         />}
       {reviews.map((review) =>

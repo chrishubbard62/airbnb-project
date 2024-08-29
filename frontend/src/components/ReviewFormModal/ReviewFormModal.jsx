@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 
 
 
-function ReviewFormModal({spotId}) {
+function ReviewFormModal({spotId, setNewReview}) {
   const session = useSelector(state => state.session)
   const [review, setReview] = useState('')
   const [stars, setStars] = useState(1)
@@ -40,6 +40,7 @@ function ReviewFormModal({spotId}) {
       stars
     }
     await dispatch(createReviewThunk(session.user, spotId, newReview))
+    setNewReview((prev) => prev + 1)
     closeModal();
   }
 

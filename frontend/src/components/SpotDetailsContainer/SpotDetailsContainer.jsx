@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSpotDetailsThunk } from "../../store/spots";
@@ -12,11 +12,13 @@ function SpotDetailsContainer() {
   const {spotId} = useParams();
   const dispatch = useDispatch();
   const spot = spotDetails[spotId]
+  const [newReview, setNewReview] = useState(0);
+  
 
 
   useEffect(() => {
     dispatch(getSpotDetailsThunk(spotId))
-  }, [dispatch, spotId])
+  }, [dispatch, spotId, newReview])
   if(!spot || !spot.SpotImages) return <h2>Loading</h2>
 
 
@@ -39,7 +41,7 @@ function SpotDetailsContainer() {
       <p>{spot.numReviews === 1 ? `${spot.numReviews} Review`: `${spot.numReviews} Reviews`}</p>
       <button>Reserve</button>
       <hr />
-      <ReviewsContainer avgRating={spot.avgRating} ownerId={spot.Owner.id}/>
+      <ReviewsContainer avgRating={spot.avgRating} ownerId={spot.Owner.id} setNewReview={setNewReview}/>
     </div>
 
   )
