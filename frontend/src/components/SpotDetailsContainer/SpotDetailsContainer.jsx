@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getSpotDetailsThunk } from "../../store/spots";
 import ReviewsContainer from "../ReviewsContainer";
+import { FaStar } from "react-icons/fa";
 
 
 function SpotDetailsContainer() {
@@ -33,9 +34,9 @@ function SpotDetailsContainer() {
       })}
       <p>Hosted By {spot.Owner.firstName} {spot.Owner.lastName}</p>
       <p>{spot.description}</p>
-      <p>{spot.avgRating}stars</p>
+      <p><FaStar />{spot.avgRating}</p>
       <p>${spot.price.toFixed(2)}/night</p>
-      <p>{spot.numReviews}reviews</p>
+      <p>{spot.numReviews === 1 ? `${spot.numReviews} Review`: `${spot.numReviews} Reviews`}</p>
       <button>Reserve</button>
       <hr />
       <ReviewsContainer avgRating={spot.avgRating} ownerId={spot.Owner.id}/>

@@ -182,7 +182,7 @@ router.get('/:spotId/reviews', async(req, res, next) => {
         model: Review,
         include: [{
             model: User,
-            attributes: ['id', 'firstName', 'lastName', 'userName']
+            attributes: ['id', 'firstName', 'lastName', 'username']
         }, {
             model: ReviewImage,
             attributes: ['id', 'url']
@@ -218,7 +218,6 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
   return res.status(201).json(newReview);
 
  })
-
 //ADD AN IMAGE TO A SPOT
 router.post('/:spotId/images', requireAuth, async (req, res, next) => {
   const {spotId} = req.params;

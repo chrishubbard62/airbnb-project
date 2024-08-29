@@ -1,6 +1,7 @@
 import { csrfFetch } from './csrf';
 
 const GET_REVIEWS = 'reviews/getReviews'
+const CREATE_REVIEW = 'reviews/createReview'
 
 const getReviews = (payload) => {
   return {
@@ -9,12 +10,34 @@ const getReviews = (payload) => {
   }
 }
 
+const createReview = (payload) => {
+  return {
+    type: CREATE_REVIEW,
+    payload
+  }
+}
+
+
 export const getReviewsThunk = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${spotId}/reviews`)
   if(res.ok) {
     const data = await res.json();
     dispatch(getReviews(data.Reviews))
     return data;
+  }
+}
+
+export const createReviewThunk = (user, spotId, review) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    method: 'POST',
+    body: JSON.stringify(review),
+    headers: {'Content-Type': 'application/json'}
+  })
+  if(res.ok) {
+    const newReview = await res.json();
+    newReview.User = user;
+    dispatch(createReview(newReview));
+    return newReview;
   }
 }
 
@@ -32,6 +55,11 @@ const reviewsReducer = (state = initialState, action) => {
         }
       })
       return newState
+    }
+    case CREATE_REVIEW: {
+      const newState = {...state}
+      newState[action.payload.id] = action.payload;
+      return newState;
     }
     default:
       return state;

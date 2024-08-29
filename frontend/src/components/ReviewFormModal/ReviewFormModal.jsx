@@ -1,13 +1,25 @@
 import { useEffect, useState } from "react";
 import { useModal } from "../../context/Modal";
+import { createReviewThunk } from "../../store/reviews";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 
-function ReviewFormModal() {
+
+
+
+function ReviewFormModal({spotId}) {
+  const session = useSelector(state => state.session)
   const [review, setReview] = useState('')
   const [stars, setStars] = useState(1)
   const [valErrors, setValErrors] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const {closeModal} = useModal();
+  const dispatch = useDispatch();
+
+
+  console.log(session.user)
+
 
   useEffect(() => {
     const errors = {}
@@ -17,12 +29,17 @@ function ReviewFormModal() {
   }, [review, stars])
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true)
     if(Object.values(valErrors).length) {
       return;
     }
+    const newReview = {
+      review,
+      stars
+    }
+    await dispatch(createReviewThunk(session.user, spotId, newReview))
     closeModal();
   }
 

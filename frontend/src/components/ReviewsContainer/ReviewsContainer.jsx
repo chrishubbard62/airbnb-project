@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getReviewsThunk } from "../../store/reviews";
 import {FaStar} from 'react-icons/fa'
-import ReviewCard from "./ReivewCard";
+import ReviewCard from "./ReviewCard";
 import OpenModalButton from "../OpenModalButton";
 import ReviewFormModal from "../ReviewFormModal";
 
@@ -20,16 +20,19 @@ function ReviewsContainer({avgRating, ownerId}) {
 useEffect(() => {
     dispatch(getReviewsThunk(spotId))
   }, [dispatch, spotId])
+
+
   if(!data) return <h2>Loading</h2>
 
   return (
     <div className="Review-container">
       <h2><FaStar/>{avgRating} · {reviews.length + `${reviews.length === 1 ? ' review': ' reviews'}`}</h2>
+
       {session.user &&
         session.user?.id !== ownerId &&
-        !reviews.some((review) => review.User.id === session.user?.id) &&
+        !reviews?.some((review) => review?.userId=== session.user?.id) &&
         <OpenModalButton
-          modalComponent={<ReviewFormModal />}
+          modalComponent={<ReviewFormModal spotId={spotId}/>}
           buttonText={'Post Your Review'}
         />}
       {reviews.map((review) =>
