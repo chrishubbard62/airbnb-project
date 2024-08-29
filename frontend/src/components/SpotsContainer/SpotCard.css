@@ -55,3 +55,16 @@
 .price {
   padding-left: 10px
 }
+
+.update-delete {
+  height: 30px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.create-spot {
+  height: 30px;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-bottom: 5px
+}

@@ -26,8 +26,8 @@ function SpotCard(props) {
       </Link>
       {current &&
       <div className='button-box'>
-       <button onClick={handleUpdate}>Update</button>
-       <OpenModalButton
+       <button className='update-delete' onClick={handleUpdate}>Update</button>
+       <OpenModalButton className='update-delete'
         modalComponent={<DeleteModal spotId={spotId} deleteType={'Spot'}/>}
         buttonText={'Delete'}
         />

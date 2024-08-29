@@ -31,7 +31,7 @@ function SpotsContainer(props) {
     <> {current ? (
         <div>
           <h1>Manage Spots</h1>
-          <button onClick={handleCreateButton}>Create a New Spot</button>
+          <button className="create-spot" onClick={handleCreateButton}>Create a New Spot</button>
         </div>
       ) : (
         <h1>WELCOME TO BIKE BNB</h1>
