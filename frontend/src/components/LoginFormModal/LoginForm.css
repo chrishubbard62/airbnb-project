@@ -1,0 +1,12 @@
+.demo-login {
+  display: flex;
+  height: 35px;
+  align-items: center;
+  padding: 5px;
+  font-size: 1.2rem;
+}
+
+.demo-login:hover{
+  background-color: black;
+  color: white;
+}

@@ -1,4 +1,5 @@
 /* TODO: Add sitewide styles */
+
 .modal-container {
   height: 500px;
   width: 500px;
@@ -23,9 +24,8 @@
 }
 
 .modal-container button {
-  margin: 10px;
-  border: 2px solid grey;
-
+  height: 35px;
+  border-radius: 10px;
 }
 
 
@@ -59,4 +59,12 @@ button:hover {
 button:hover:disabled {
    cursor: not-allowed;
    background-color: grey;
+}
+
+label {
+  font-size: 1.2rem
+}
+
+input {
+  font-size: 1.2rem;
 }

@@ -36,7 +36,7 @@ module.exports = {
       },
       {
         spotId: 2,
-        url: 'https://i.ibb.co/18Mcm6Y/Gemini-Generated-Image-ffqwfgffqwfgffqw.jpg',
+        url: 'https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg',
         preview: true,
       },
       {

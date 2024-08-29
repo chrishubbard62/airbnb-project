@@ -49,8 +49,8 @@
 
 .reserve-box button {
   width: 75%;
-  height: 35px;
   margin-bottom: 10px;
+  height: 35px;
   border-radius: 10px;
   border: 2px solid black;
 }
