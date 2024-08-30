@@ -76,7 +76,8 @@ function SpotForm(props) {
     if (lng.length < 1) errors.lng = 'Longitude is required'
     if (lat < -90 || lat > 90) errors.lat = 'Latitude muse be between -90 and 90'
     if (lng < -180 || lng > 180) errors.lng = 'Longitude must be between -180 and 180'
-    if (description.length < 30) errors.description = 'description needs to be a minimum of 30 characters'
+    if (description.length < 30) errors.description = 'Description needs to be a minimum of 30 characters'
+    if (description.length > 1000) errors.description = 'Description must be less than 1000 characters'
     if (name.length < 1) errors.name = 'Name is required'
     if (price < .01) errors.price = 'Price must be greater than $0'
     if (newSpot && !ENDINGS.some((ending) => prevImage.endsWith(ending))) errors.prevImage = 'Image URL must end with .png .jpg, or .jpeg'
@@ -129,7 +130,8 @@ function SpotForm(props) {
     <div className="form-container">
       <form className="new-spot-form" style={{ display: 'flex', flexDirection: 'column', width: 525 }}>
         {newSpot ? <h2>Create a new Spot</h2> : <h2>Update your Spot</h2>}
-        <p>Where&apos;s your place located? Guests will only get your exact address once they booked a reservation.</p>
+        <h3>Where&apos;s your place located? </h3>
+        <p>Guests will only get your exact address once they booked a reservation.</p>
         <div>
           <label htmlFor="country">Country</label>
           {submitted && valErrors.country && <span className="errors"> {valErrors.country}</span>}

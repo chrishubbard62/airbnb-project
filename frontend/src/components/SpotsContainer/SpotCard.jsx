@@ -20,7 +20,8 @@ function SpotCard(props) {
         <span className='tool-tip'>{spot.name}</span>
         <div className='state-stars'>
           <div>{spot.city}, {spot.state}</div>
-          <div>{spot.avgRating !== 'NEW!' && <FaStar className='star'/>}{spot.avgRating}</div>
+          {/* <div>{spot.avgRating !== 'NEW!' && <FaStar className='star'/>}{spot.avgRating}</div> */}
+          <div><FaStar></FaStar>{spot.avgRating !== 'NEW!' ? `${spot.avgRating.toFixed(1)}` : 'NEW!'}</div>
         </div>
         <div className='price'>${spot.price.toFixed(2)}/Night</div>
       </Link>

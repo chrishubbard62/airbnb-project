@@ -54,7 +54,7 @@ function SpotDetailsContainer() {
         <div className="reserve-box">
           <div className="info">
             <p>${spot.price.toFixed(2)}/night</p>
-            <p><span><FaStar />{spot.avgRating !== 'NEW!' ? spot.avgRating.toFixed(1) : 'NEW!'}</span> · {spot.numReviews === 1 ? `${spot.numReviews} Review` : `${spot.numReviews} Reviews`}</p>
+            <p><span><FaStar />{spot.avgRating !== 'NEW!' ? spot.avgRating.toFixed(1) : 'NEW!'}</span>{spot.numReviews > 0 && <span> · {`${spot.numReviews}` + `${spot.numReviews === 1 ? ' review' : ' reviews'}`}</span>} </p>
           </div>
           <button onClick={handleReserve}>Reserve</button>
         </div>

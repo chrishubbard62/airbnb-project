@@ -29,7 +29,7 @@ if(!data) return <h2>Loading</h2>
 
   return (
     <div className="review-container">
-      <h2><FaStar/>{avgRating} · {reviews.length + `${reviews.length === 1 ? ' review': ' reviews'}`}</h2>
+      <h3><FaStar/>{avgRating !== 'NEW!' ? avgRating.toFixed(1): 'NEW!'} {reviews.length > 0 && <span> · {`${reviews.length}` + `${reviews.length === 1 ? ' review' : ' reviews'}`}</span>}</h3>
       {
         session.user &&
         session.user?.id !== ownerId &&
