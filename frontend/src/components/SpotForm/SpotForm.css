@@ -21,9 +21,11 @@ textarea {
 }
 
 .form-submit {
-  height: 50px;
+  height: 35px;
   border: 2px solid black;
   border-radius: 10px;
+  width: 30%;
+  align-self: center;
 }
 
 .form-submit:hover {
@@ -56,4 +58,18 @@ textarea {
 
 .rating-input label {
   font-size: 1.5rem;
+}
+
+.price-input {
+  width: 95%;
+}
+
+.lat-lng-container {
+  display: flex;
+  gap: 3%;
+}
+
+.city-state {
+  display: flex;
+  gap: 3%
 }

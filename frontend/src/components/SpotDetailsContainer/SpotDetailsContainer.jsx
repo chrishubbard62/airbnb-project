@@ -11,17 +11,18 @@ import './SpotDetails.css'
 
 function SpotDetailsContainer() {
   const spotDetails = useSelector(state => state.spots)
+  const reviews = useSelector(state => state.reviews)
   const { spotId } = useParams();
   const dispatch = useDispatch();
   const spot = spotDetails[spotId]
   const [newReview, setNewReview] = useState(0);
-  const [deleted, setDeleted] = useState(0);
+
 
 
 
   useEffect(() => {
     dispatch(getSpotDetailsThunk(spotId))
-  }, [dispatch, spotId, newReview, deleted])
+  }, [dispatch, spotId, newReview, reviews])
   if (!spot || !spot.SpotImages) return <h2>Loading</h2>
 
   const handleReserve = () => {
@@ -53,13 +54,13 @@ function SpotDetailsContainer() {
         <div className="reserve-box">
           <div className="info">
             <p>${spot.price.toFixed(2)}/night</p>
-            <p><span><FaStar />{spot.avgRating}</span> · {spot.numReviews === 1 ? `${spot.numReviews} Review` : `${spot.numReviews} Reviews`}</p>
+            <p><span><FaStar />{spot.avgRating !== 'NEW!' ? spot.avgRating.toFixed(1) : 'NEW!'}</span> · {spot.numReviews === 1 ? `${spot.numReviews} Review` : `${spot.numReviews} Reviews`}</p>
           </div>
           <button onClick={handleReserve}>Reserve</button>
         </div>
       </div>
       <hr className='details-hr'/>
-      <ReviewsContainer avgRating={spot.avgRating} ownerId={spot.Owner.id} setNewReview={setNewReview} deleted={deleted} setDeleted={setDeleted}/>
+      <ReviewsContainer avgRating={spot.avgRating} ownerId={spot.Owner.id} setNewReview={setNewReview}/>
     </div>
 
   )

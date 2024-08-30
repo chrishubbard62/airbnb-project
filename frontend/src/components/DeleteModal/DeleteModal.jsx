@@ -6,7 +6,7 @@ import './DeleteModal.css'
 
 
 function DeleteModal(props) {
-  const {spotId, deleteType, reviewId, setDeleted} = props;
+  const {spotId, deleteType, reviewId} = props;
   const dispatch = useDispatch();
   const {closeModal} = useModal();
   const handleNo = () => {
@@ -19,7 +19,6 @@ function DeleteModal(props) {
       dispatch(deleteSpotThunk(spotId))
     } else {
       dispatch(deleteReviewThunk(reviewId))
-      setDeleted(prev => prev + 1)
     }
     closeModal();
   }

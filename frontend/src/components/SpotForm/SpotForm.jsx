@@ -121,127 +121,143 @@ function SpotForm(props) {
       price
     }
     await dispatch(updateSpotThunk(id, spot))
+
     navigate(`/${id}`)
   }
 
   return (
     <div className="form-container">
-    <form className="new-spot-form" style={{ display: 'flex', flexDirection: 'column', width: 500 }}>
-      {newSpot ? <h2>Create a new Spot</h2> : <h2>Update your Spot</h2>}
-      <p>Where&apos;s your place located? Guests will only get your exact address once they booked a reservation.</p>
-      <div>
-        <label htmlFor="country">Country</label>
-        {submitted && valErrors.country && <span className="errors"> {valErrors.country}</span>}
-      </div>
-      <input
-        value={country}
-        onChange={(e) => setCountry(e.target.value)}
-        placeholder="Country"
-        type="text"
-        name="country" />
-      <div>
-        <label htmlFor="address">Street Address</label>
-        {submitted && valErrors.address && <span className="errors"> {valErrors.address}</span>}
-      </div>
-      <input
-        value={address}
-        onChange={(e) => setAddress(e.target.value)}
-        placeholder="Address"
-        type="text"
-        name="address" />
-      <div>
-        <label htmlFor="city">City</label>
-        {submitted && valErrors.city && <span className="errors"> {valErrors.city}</span>}
-      </div>
-      <input
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        placeholder="City"
-        type="text"
-        name="city" />
-      <div>
-        <label htmlFor="state">State</label>
-        {submitted && valErrors.state && <span className="errors"> {valErrors.state}</span>}
-      </div>
-      <input
-        value={state}
-        onChange={(e) => setState(e.target.value)}
-        placeholder="State"
-        type="text"
-        name="state" />
-      <div>
-        <label htmlFor="latitude">Latitude</label>
-        {submitted && valErrors.lat && <span className="errors"> {valErrors.lat}</span>}
-      </div>
-      <input
-        value={lat}
-        onChange={(e) => setLat(+e.target.value)}
-        type="number"
-        name="latitude"
-      />
-      <div>
-        <label htmlFor="longitude">Longitude</label>
-        {submitted && valErrors.lng && <span className="errors"> {valErrors.lng}</span>}
-      </div>
-      <input
-        value={lng}
-        onChange={(e) => setLng(+e.target.value)}
-        type="number"
-        name="longitude"
-      />
-      <h3>Describe your place to guests</h3>
-      <p>Mention the best features of your space, any special amentities like
-        fast wifi or parking, and what you love about the neighborhood.</p>
-      <textarea
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder="Description"
-        name="description"
-        id="">
-      </textarea>
-      {submitted && valErrors.description ? <div className="errors">{valErrors.description}</div> : <div className="hide">Validated</div>}
-      <h3>Create a title for your spot</h3>
-      <p>Catch guests&apos; attention with a spot title that highlights what makes
-        your place special.</p>
-      <input
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Name of your spot"
-        type="text"
-        name="name" />
-      {submitted && valErrors.name ? <div className="errors">{valErrors.name}</div> : <div className="hide">Validated</div>}
-      <h3>Set a base price for your spot</h3>
-      <p>Competitive pricing can help your listing stand out and rank higher
-        in search results.</p>
-      <label>$
+      <form className="new-spot-form" style={{ display: 'flex', flexDirection: 'column', width: 525 }}>
+        {newSpot ? <h2>Create a new Spot</h2> : <h2>Update your Spot</h2>}
+        <p>Where&apos;s your place located? Guests will only get your exact address once they booked a reservation.</p>
+        <div>
+          <label htmlFor="country">Country</label>
+          {submitted && valErrors.country && <span className="errors"> {valErrors.country}</span>}
+        </div>
         <input
-          value={price}
-          onChange={(e) => setPrice(+e.target.value)}
-          type="number"
-          name="price"
-          placeholder="Price per night (USD)" />
-      </label>
-      {submitted && valErrors.price ? <div className="errors">{valErrors.price}</div> : <div className="hide">Validated</div>}
-      <h3>Liven up your spot with photos</h3>
-      <p>Submit a link to at least one photo to publish your spot</p>
-      <input
-        disabled={!newSpot}
-        value={prevImage}
-        onChange={(e) => setPrevImage(e.target.value)}
-        type="text"
-        name='preview'
-        placeholder={newSpot ? "Preview Image URL" : "Feature Coming Soon"} />
-      {submitted && valErrors.prevImage ? <div className="errors">{valErrors.prevImage}</div> : <div className="hide">Validated</div>}
-      <input type="text" name='image' placeholder="Feature Coming Soon" disabled={true} />
-      {<div className='hide'>Validated</div>}
-      <input type="text" name='image' placeholder="Feature Coming Soon" disabled={true} />
-      {<div className='hide'>Validated</div>}
-      <input type="text" name='image' placeholder="Feature Coming Soon" disabled={true} />
-      {<div className='hide'>Validated</div>}
-      {
-        newSpot ? <button className="form-submit" onClick={handleSubmit}>Create Spot</button> : <button className="form-submit" onClick={handleUpdate}>Update</button>
-      }
-    </form>
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+          placeholder="Country"
+          type="text"
+          name="country" />
+        <div>
+          <label htmlFor="address">Street Address</label>
+          {submitted && valErrors.address && <span className="errors"> {valErrors.address}</span>}
+        </div>
+        <input
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          placeholder="Address"
+          type="text"
+          name="address" />
+        <div className="city-state">
+          <div>
+            <div>
+              <label htmlFor="city">City</label>
+              {submitted && valErrors.city && <span className="errors"> {valErrors.city}</span>}
+            </div>
+            <input
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              placeholder="City"
+              type="text"
+              name="city" />
+          </div>
+          <div>
+            <div>
+              <label htmlFor="state">State</label>
+              {submitted && valErrors.state && <span className="errors"> {valErrors.state}</span>}
+            </div>
+            <input
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              placeholder="State"
+              type="text"
+              name="state" />
+          </div>
+        </div>
+        <div className="lat-lng-container">
+          <div>
+            <div>
+              <label htmlFor="latitude">Latitude</label>
+              {submitted && valErrors.lat && <span className="errors"> {valErrors.lat}</span>}
+            </div>
+            <input
+              className="lat-lng"
+              value={lat}
+              onChange={(e) => setLat(+e.target.value)}
+              type="number"
+              name="latitude"
+            />
+          </div>
+          <div>
+            <div>
+              <label htmlFor="longitude">Longitude</label>
+              {submitted && valErrors.lng && <span className="errors"> {valErrors.lng}</span>}
+            </div>
+            <input
+              className="lat-lng"
+              value={lng}
+              onChange={(e) => setLng(+e.target.value)}
+              type="number"
+              name="longitude"
+            />
+          </div>
+        </div>
+        <h3>Describe your place to guests</h3>
+        <p>Mention the best features of your space, any special amentities like
+          fast wifi or parking, and what you love about the neighborhood.</p>
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+          name="description"
+          id="">
+        </textarea>
+        {submitted && valErrors.description ? <div className="errors">{valErrors.description}</div> : <div className="hide">Validated</div>}
+        <h3>Create a title for your spot</h3>
+        <p>Catch guests&apos; attention with a spot title that highlights what makes
+          your place special.</p>
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Name of your spot"
+          type="text"
+          name="name" />
+        {submitted && valErrors.name ? <div className="errors">{valErrors.name}</div> : <div className="hide">Validated</div>}
+        <h3>Set a base price for your spot</h3>
+        <p>Competitive pricing can help your listing stand out and rank higher
+          in search results.</p>
+        <label>$
+          <input
+            className="price-input"
+            value={price}
+            onChange={(e) => setPrice(+e.target.value)}
+            type="number"
+            name="price"
+            placeholder="Price per night (USD)" />
+        </label>
+        {submitted && valErrors.price ? <div className="errors">{valErrors.price}</div> : <div className="hide">Validated</div>}
+        <h3>Liven up your spot with photos</h3>
+        <p>Submit a link to at least one photo to publish your spot</p>
+        <input
+          disabled={!newSpot}
+          value={prevImage}
+          onChange={(e) => setPrevImage(e.target.value)}
+          type="text"
+          name='preview'
+          placeholder={newSpot ? "Preview Image URL" : "Feature Coming Soon"} />
+        {submitted && valErrors.prevImage ? <div className="errors">{valErrors.prevImage}</div> : <div className="hide">Validated</div>}
+        <input type="text" name='image' placeholder="Feature Coming Soon" disabled={true} />
+        {<div className='hide'>Validated</div>}
+        <input type="text" name='image' placeholder="Feature Coming Soon" disabled={true} />
+        {<div className='hide'>Validated</div>}
+        <input type="text" name='image' placeholder="Feature Coming Soon" disabled={true} />
+        {<div className='hide'>Validated</div>}
+        {
+          newSpot ? <button className="form-submit" onClick={handleSubmit}>Create Spot</button> : <button className="form-submit" onClick={handleUpdate}>Update</button>
+        }
+      </form>
     </div>
   )
 }

@@ -10,7 +10,7 @@ import ReviewFormModal from "../ReviewFormModal";
 import './Review.css'
 
 
-function ReviewsContainer({avgRating, ownerId, setNewReview, deleted, setDeleted}) {
+function ReviewsContainer({avgRating, ownerId, setNewReview}) {
   const {spotId} = useParams();
   const session = useSelector(state => state.session)
   const data = useSelector(state => state.reviews);
@@ -20,9 +20,8 @@ function ReviewsContainer({avgRating, ownerId, setNewReview, deleted, setDeleted
   reviews.reverse();
 
 useEffect(() => {
-  console.log('i rerendered')
     dispatch(getReviewsThunk(spotId))
-  }, [dispatch, spotId, deleted])
+  }, [dispatch, spotId])
 
 
 
@@ -47,7 +46,6 @@ if(!data) return <h2>Loading</h2>
       <ReviewCard
         key={review.id}
         review={review}
-        setDeleted={setDeleted}
       />
       )}
     </div>

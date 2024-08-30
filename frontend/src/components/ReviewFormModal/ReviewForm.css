@@ -1,12 +1,12 @@
 .text-area {
   width: 400px;
   height: 250px;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 
 .review-button {
-  height: 50px;
   border-radius: 15px;
+  width: 400px;
 }
 
 .review-button:disabled:hover {

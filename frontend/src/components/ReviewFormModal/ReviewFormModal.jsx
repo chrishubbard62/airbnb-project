@@ -101,7 +101,7 @@ function ReviewFormModal({spotId, setNewReview}) {
             <label>Stars</label>
           </div>
 
-        <button className="review-button" disabled={review.length < 10}onClick={handleSubmit}>Submit your Review</button>
+        <button className="review-button" disabled={review.length < 10 || stars < 1} onClick={handleSubmit}>Submit your Review</button>
         {submitted && valErrors.review && <p className="errors">{valErrors.review}</p>}
         {submitted && valErrors.stars && <p className='errors'>{valErrors.stars}</p>}
       </form>

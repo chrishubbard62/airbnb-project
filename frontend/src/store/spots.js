@@ -54,16 +54,19 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
 }
 
 export const updateSpotThunk = (spotId, spot) => async (dispatch) => {
-  const res = await csrfFetch(`/api/spots/${spotId}`, {
-    method: 'PUT',
-    body: JSON.stringify(spot),
-    headers: {'Content-Type': 'application/json'}
-  })
-  if(res.ok) {
-    const updatedSpot = await res.json();
-    dispatch(updateSpot(updatedSpot));
-    return updatedSpot;
-  }
+
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+      method: 'PUT',
+      body: JSON.stringify(spot),
+      headers: {'Content-Type': 'application/json'}
+    })
+    if(res.ok) {
+      const updatedSpot = await res.json();
+      dispatch(updateSpot(updatedSpot));
+      return updatedSpot;
+    }
+
+
 }
 
 export const getSpotDetailsThunk = (spotId) => async (dispatch) => {
@@ -77,16 +80,17 @@ export const getSpotDetailsThunk = (spotId) => async (dispatch) => {
 
 
 export const createSpotThunk = (spot) => async (dispatch) => {
-  const res = await csrfFetch('/api/spots', {
-    method: 'POST',
-    body: JSON.stringify(spot),
-    headers: {'Content-Type': 'application/json'}
-  })
-  if(res.ok) {
-    const newSpot = await res.json();
-    dispatch(createSpot(newSpot));
-    return newSpot;
-  }
+
+    const res = await csrfFetch('/api/spots', {
+      method: 'POST',
+      body: JSON.stringify(spot),
+      headers: {'Content-Type': 'application/json'}
+    })
+    if(res.ok) {
+      const newSpot = await res.json();
+      dispatch(createSpot(newSpot));
+      return newSpot;
+    }
 }
 
 export const getSpotsThunk = () => async (dispatch) => {
