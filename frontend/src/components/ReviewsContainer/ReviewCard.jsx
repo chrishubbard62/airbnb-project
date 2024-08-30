@@ -4,7 +4,7 @@ import DeleteModal from "../DeleteModal";
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
 
-function ReviewCard({review}) {
+function ReviewCard({review, setDeleted}) {
   const session = useSelector(state => state.session)
   const date = new Date(review.createdAt)
   const month = date.getMonth();
@@ -17,7 +17,7 @@ function ReviewCard({review}) {
       <p className="review-text">{review.review}</p>
       {session.user?.id === review.User.id &&
       <OpenModalButton
-        modalComponent={<DeleteModal reviewId={review.id} deleteType={'Review'}/>}
+        modalComponent={<DeleteModal reviewId={review.id} deleteType={'Review'} setDeleted={setDeleted}/>}
         buttonText={'Delete'}
       />}
       <hr />

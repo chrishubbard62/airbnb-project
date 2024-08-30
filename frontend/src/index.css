@@ -12,25 +12,20 @@
   align-items: center;
 }
 
-.demo-login {
-  background-color: lightgray;
-  margin: 1rem;
-  border: 1px solid grey;
-  border-radius: 5px;
-}
 
 .demo-login:hover {
   cursor: pointer
 }
 
 .modal-container button {
-  height: 35px;
+  height: 30px;
   border-radius: 10px;
 }
 
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
 }
 
 a {
@@ -71,11 +66,16 @@ input {
 
 .modal-button {
   height: 30px;
-  outline: 2px solid black;
-  border-radius: 5px;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 .button-box {
   display: flex;
   gap: 25px
+}
+
+button {
+  border-radius: 10px;
+  border: 2px solid black;
 }

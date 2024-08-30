@@ -15,12 +15,13 @@ function SpotDetailsContainer() {
   const dispatch = useDispatch();
   const spot = spotDetails[spotId]
   const [newReview, setNewReview] = useState(0);
+  const [deleted, setDeleted] = useState(0);
 
 
 
   useEffect(() => {
     dispatch(getSpotDetailsThunk(spotId))
-  }, [dispatch, spotId, newReview])
+  }, [dispatch, spotId, newReview, deleted])
   if (!spot || !spot.SpotImages) return <h2>Loading</h2>
 
   const handleReserve = () => {
@@ -58,7 +59,7 @@ function SpotDetailsContainer() {
         </div>
       </div>
       <hr className='details-hr'/>
-      <ReviewsContainer avgRating={spot.avgRating} ownerId={spot.Owner.id} setNewReview={setNewReview} />
+      <ReviewsContainer avgRating={spot.avgRating} ownerId={spot.Owner.id} setNewReview={setNewReview} deleted={deleted} setDeleted={setDeleted}/>
     </div>
 
   )

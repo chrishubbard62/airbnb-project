@@ -11,14 +11,18 @@
   margin: 5px
 }
 
+.delete-container p {
+  text-align: center;
+}
+
 .delete-container button {
   margin: 5px;
   height: 30px;
-  width: 150px;
+  width: 95%;
   border: 2px solid black;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .yes-button {
-  background-color: red;
+  background-color: 	#ba3c3c;
 }
