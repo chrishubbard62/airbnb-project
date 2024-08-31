@@ -73,6 +73,8 @@
 .log-out {
     height: 35px;
     border-radius: 10px;
+    margin-left: 25%;
+    margin-right: 25%;
 }
 
 .drop-down:hover {
@@ -81,8 +83,8 @@
 
 .profile-dropdown {
   position: absolute;
-  top: 67px;
-  right: 67px;
+  top: 69px;
+  right: 60px;
   border: 2px solid black;
   list-style: none;
   background-color: lightgray;

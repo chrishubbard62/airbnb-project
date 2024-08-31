@@ -53,7 +53,7 @@ function SignupFormModal() {
   }, [email, username, firstName, lastName, password, confirmPassword])
 
   return (
-    <div className='modal-container'>
+    <div className='modal-container sign-up-form'>
       <h1 style={{textAlign: 'center'}}>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -113,7 +113,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        <button disabled={disabled} type="submit">Sign Up</button>
+        <button disabled={disabled} className='sign-up-submit' type="submit">Sign Up</button>
         {errors.email && <div className='errors'>{errors.email}</div>}
         {errors.username && <div className='errors'>{errors.username}</div>}
         {errors.firstName && <div className='errors'>{errors.firstName}</div>}

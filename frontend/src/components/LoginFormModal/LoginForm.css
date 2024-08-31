@@ -1,7 +1,7 @@
 .demo-login {
   display: flex;
   margin-top: 10px;
-  height: 30px;
+  height: 25px;
   align-items: center;
   padding: 5px;
   font-size: 1.1rem;
@@ -12,6 +12,9 @@
 
 .submit-login {
   margin-top: 10px;
+  margin-bottom: 5px;
+  width: 83%;
+
 }
 
 .demo-login:hover{

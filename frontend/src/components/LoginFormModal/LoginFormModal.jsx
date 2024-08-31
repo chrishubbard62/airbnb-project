@@ -44,7 +44,7 @@ function LoginFormModal() {
 
 
   return (
-    <div className='modal-container'>
+    <div className='modal-container login-modal'>
       <h1 style={{textAlign: 'center'}}>Log In</h1>
       <form onSubmit={handleSubmit}>
         <label>
