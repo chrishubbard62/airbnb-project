@@ -50,15 +50,12 @@ export const login = (user) => async (dispatch) => {
       password
     })
   });
-  console.log(response)
+
   if(response.ok) {
     const data = await response.json();
     dispatch(setUser(data.user));
     return response;
-  } else {
-    console.log('hello')
-  }
-
+  } 
 };
 // DELETES THE SESSION FROM THE DB THEN DISPATCHES TO REMOVE USER
 export const logout = () => async (dispatch) => {

@@ -17,10 +17,6 @@ function ReviewFormModal({spotId, setNewReview}) {
   const dispatch = useDispatch();
   const [activeRating, setActiveRating] = useState(0)
 
-
-
-
-
   useEffect(() => {
     const errors = {}
     if(review.length < 1) errors.review = 'Review must have text'
@@ -55,13 +51,6 @@ function ReviewFormModal({spotId, setNewReview}) {
           value={review}
           onChange={(e) => setReview(e.target.value)}
           />
-        {/* <input
-          type="number"
-          name="stars"
-          min={1}
-          max={5}
-          value={stars}
-          onChange={(e) => setStars(+e.target.value)}/> */}
           <div className="rating-input">
             <span className={stars > 0 || activeRating > 0 ? 'filled' : 'empty'}>
               <FaStar

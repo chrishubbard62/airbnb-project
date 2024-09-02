@@ -23,11 +23,11 @@ const validateSpot = [
     .exists({ checkFalsy: true })
     .withMessage('Country is required'),
   check('lat')
-    .exists({ checkFalsy: true })
+    .exists({ checkFalsy: false })
     .isFloat({min: -90.0, max: 90.0})
     .withMessage('Latitude must be within -90 and 90'),
   check('lng')
-    .exists({ checkFalsy: true })
+    .exists({ checkFalsy: false }) 
     .isFloat({min: -180.0, max: 180.0})
     .withMessage('Longitude must be within -180 and 180'),
   check('name')

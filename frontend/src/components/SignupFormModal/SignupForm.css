@@ -1,5 +1,10 @@
 .sign-up-submit {
   margin-top: 15px;
   margin-bottom: 15px;
-  width: 85%;
+  width: 83%;
+}
+
+.login-modal h1 {
+  margin-top: 10px;
+  margin-bottom: 5px;
 }

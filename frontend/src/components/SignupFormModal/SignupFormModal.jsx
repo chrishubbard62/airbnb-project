@@ -56,6 +56,12 @@ function SignupFormModal() {
     <div className='modal-container sign-up-form'>
       <h1 style={{textAlign: 'center'}}>Sign Up</h1>
       <form onSubmit={handleSubmit}>
+        {errors.email && <div className='errors'>{errors.email}</div>}
+        {errors.username && <div className='errors'>{errors.username}</div>}
+        {errors.firstName && <div className='errors'>{errors.firstName}</div>}
+        {errors.lastName && <div className='errors'>{errors.lastName}</div>}
+        {errors.confirmPassword && <div className='errors'>{errors.confirmPassword}</div>}
+        {errors.password && <div className='errors'>{errors.password}</div>}
         <label>
           <div>Email</div>
           <input
@@ -114,12 +120,6 @@ function SignupFormModal() {
           />
         </label>
         <button disabled={disabled} className='sign-up-submit' type="submit">Sign Up</button>
-        {errors.email && <div className='errors'>{errors.email}</div>}
-        {errors.username && <div className='errors'>{errors.username}</div>}
-        {errors.firstName && <div className='errors'>{errors.firstName}</div>}
-        {errors.lastName && <div className='errors'>{errors.lastName}</div>}
-        {errors.confirmPassword && <div className='errors'>{errors.confirmPassword}</div>}
-        {errors.password && <div className='errors'>{errors.password}</div>}
       </form>
     </div>
   );

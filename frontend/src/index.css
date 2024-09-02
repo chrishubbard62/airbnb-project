@@ -8,8 +8,9 @@
 
 .sign-up-form {
   width: 300px;
-  height: 450px;
+  height: 495px;
 }
+
 
 .login-modal {
   width: 300px;
@@ -18,16 +19,17 @@
 
 .sign-up-form h1 {
   margin-top: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
+
+
 
 .modal-container form {
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
-
-
 
 .demo-login:hover {
   cursor: pointer
@@ -94,4 +96,14 @@ input {
 button {
   border-radius: 10px;
   border: 2px solid black;
+}
+.errors {
+  color: red;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+.sign-up-form .errors {
+  width: 90%;
 }

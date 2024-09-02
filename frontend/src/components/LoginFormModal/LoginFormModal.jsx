@@ -47,6 +47,9 @@ function LoginFormModal() {
     <div className='modal-container login-modal'>
       <h1 style={{textAlign: 'center'}}>Log In</h1>
       <form onSubmit={handleSubmit}>
+      {errors.credential && (
+          <p className='errors'>{errors.credential}</p>
+        )}
         <label>
           <div>Username or Email</div>
           <input
@@ -67,11 +70,8 @@ function LoginFormModal() {
         </label>
         <button disabled={disabled} className='submit-login' type="submit">Log In</button>
         <div className='demo-login' onClick={handleDemo}>Log In as Demo User</div>
-        {errors.credential && (
-          <p className='errors'>{errors.credential}</p>
-        )}
+
       </form>
-      {/* <button onClick={handleDemo}>Log in as Demo User</button> */}
     </div>
   );
 }

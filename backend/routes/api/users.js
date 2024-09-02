@@ -44,17 +44,25 @@ router.post(
   async (req, res) => {
     const { email, password, username, firstName, lastName } = req.body;
 
-    const checkUsers = await User.findAll({where: {
+    const checkUsers = await User.findAll({
+      where: {
       [Op.or]: [{email}, {username}]
-    }});
+      },
+      attributes: ['email' , 'username']
+
+    });
+
+    const errors = {};
+    if(checkUsers.find((user) => user.username === username)) errors.username = "Username already exists"
+    if(checkUsers.find((user) => user.email === email)) errors.email = "Email already exists"
+
+
+
     // if user exists send this response
     if(checkUsers.length !== 0) {
       return res.status(500).json({
         "message": "User already exists",
-        "errors": {
-          "email": "User with that email already exists",
-          "username": "User with that username already exists"
-        }
+        errors
       })
     }
 
