@@ -1,9 +1,39 @@
-.card-container {
+/* .card-container {
   display: flex;
   flex-wrap: wrap;
   gap: 2%;
-}
+} */
 
 .create-spot {
   border-radius: 10px;
 }
+
+.card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 15px;
+}
+
+.outer-container {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 1880px) {
+  .card-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 1450px) {
+ .card-container {
+  grid-template-columns: 1fr 1fr;
+ }
+}
+
+@media screen and (max-width: 970px) {
+
+  .card-container {
+   grid-template-columns: 1fr;
+  }
+ }

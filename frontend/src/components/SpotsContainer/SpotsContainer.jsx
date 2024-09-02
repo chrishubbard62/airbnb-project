@@ -13,14 +13,14 @@ function SpotsContainer(props) {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   let spots = Object.values(data)
-  const {current} = props
-  if(current) {
+  const { current } = props
+  if (current) {
     spots = spots.filter((spot) => spot.ownerId === session.user.id)
   }
 
 
   useEffect(() => {
-      dispatch(getSpotsThunk())
+    dispatch(getSpotsThunk())
   }, [dispatch, current])
 
   const handleCreateButton = () => {
@@ -28,7 +28,9 @@ function SpotsContainer(props) {
   }
 
   return (
-    <> {current ? (
+    <div className="outer-container">
+      <div className="inner-container">
+      {current ? (
         <div>
           <h1>Manage Spots</h1>
           <button className="create-spot" onClick={handleCreateButton}>Create a New Spot</button>
@@ -37,13 +39,14 @@ function SpotsContainer(props) {
         <h1>WELCOME TO BIKE BNB</h1>
       )}
       <div className="card-container" style={{}}>
-      {spots?.map((spot) => {
-        return (
-          <SpotCard key={`${spot.id}`} spot={spot} current={current} spotId={spot.id}/>
-        )
-      })}
+        {spots?.map((spot) => {
+          return (
+            <SpotCard key={`${spot.id}`} spot={spot} current={current} spotId={spot.id} />
+          )
+        })}
+        </div>
       </div>
-    </>
+    </div>
   )
 
 }
