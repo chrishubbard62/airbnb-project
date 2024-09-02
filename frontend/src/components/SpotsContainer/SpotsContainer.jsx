@@ -38,7 +38,6 @@ function SpotsContainer(props) {
       )}
       <div className="card-container" style={{}}>
       {spots?.map((spot) => {
-        console.log(spot.previewImage)
         return (
           <SpotCard key={`${spot.id}`} spot={spot} current={current} spotId={spot.id}/>
         )
