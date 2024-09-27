@@ -65,8 +65,6 @@ export const updateSpotThunk = (spotId, spot) => async (dispatch) => {
       dispatch(updateSpot(updatedSpot));
       return updatedSpot;
     }
-
-
 }
 
 export const getSpotDetailsThunk = (spotId) => async (dispatch) => {
