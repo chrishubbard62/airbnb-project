@@ -5,8 +5,10 @@ import { useParams } from "react-router-dom";
 import { getSpotDetailsThunk } from "../../store/spots";
 import ReviewsContainer from "../ReviewsContainer";
 import { FaStar } from "react-icons/fa";
+import OpenModalButton from "../OpenModalButton";
 
 import './SpotDetails.css'
+import BookingModal from "../BookingModal";
 
 
 function SpotDetailsContainer() {
@@ -25,9 +27,7 @@ function SpotDetailsContainer() {
   }, [dispatch, spotId, newReview, reviews])
   if (!spot || !spot.SpotImages) return <h2>Loading</h2>
 
-  const handleReserve = () => {
-    alert('Feature coming soon')
-  }
+
 
 
   const thumbnails = spot.SpotImages.filter((img) => img.preview === false)
@@ -56,7 +56,10 @@ function SpotDetailsContainer() {
             <p>${spot.price.toFixed(2)}/night</p>
             <p><span><FaStar />{spot.avgRating !== 'NEW!' ? spot.avgRating.toFixed(1) : 'NEW!'}</span>{spot.numReviews > 0 && <span> · {`${spot.numReviews}` + `${spot.numReviews === 1 ? ' review' : ' reviews'}`}</span>} </p>
           </div>
-          <button onClick={handleReserve}>Reserve</button>
+          <OpenModalButton
+            buttonText={'Reserve'}
+            modalComponent={<BookingModal spotId={spotId}/>}
+          />
         </div>
       </div>
       <hr className='details-hr'/>
