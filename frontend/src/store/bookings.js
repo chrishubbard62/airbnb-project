@@ -13,7 +13,7 @@ export const getSpotBookingsThunk = (id) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/${id}/bookings`)
   if(res.ok) {
     const data = await res.json()
-  
+
     dispatch(getSpotBookings(data.Bookings))
     return data
   }

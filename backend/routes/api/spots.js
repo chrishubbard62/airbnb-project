@@ -27,7 +27,7 @@ const validateSpot = [
     .isFloat({min: -90.0, max: 90.0})
     .withMessage('Latitude must be within -90 and 90'),
   check('lng')
-    .exists({ checkFalsy: false }) 
+    .exists({ checkFalsy: false })
     .isFloat({min: -180.0, max: 180.0})
     .withMessage('Longitude must be within -180 and 180'),
   check('name')
@@ -165,8 +165,8 @@ router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
   if(userId !== spot.dataValues.ownerId) {
     const bookings = [];
     spot.dataValues.Bookings.forEach((booking) => {
-      const { spotId, startDate, endDate } = booking.dataValues;
-      bookings.push({ spotId, startDate, endDate})
+      const {id, spotId, startDate, endDate } = booking.dataValues;
+      bookings.push({id, spotId, startDate, endDate})
     })
     return res.json({Bookings: bookings})
   }

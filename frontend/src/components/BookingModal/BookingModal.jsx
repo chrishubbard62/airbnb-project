@@ -2,22 +2,31 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getSpotBookingsThunk } from "../../store/bookings"
 import { DateRange } from "react-date-range"
-import { addDays, eachDayOfInterval } from 'date-fns'
+import { eachDayOfInterval } from 'date-fns'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 
 export default function BookingModal({ spotId }) {
   const dispatch = useDispatch()
-  const bookings = useSelector(state => state.bookings[spotId])
+  const bookings = useSelector(state => state.bookings)
+  const [dates, setDates] = useState([])
+
+  /*
+  1) thunk bookings and grab from store
+  2) turn bookings into an array
+  3) filter bookings array to only have the current spots id included
+  4) iterate over the bookings and use custom function and date-fn each day of interval to return and array of date objects
+  5) spread that array of date objects into the disabled day array
+  6) add the disabled day array to the disable dates prop
+  */
 
 
   useEffect(() => {
     if(bookings) {
-      const disabled = Object.values(bookings)
-      console.log(disabled)
+      const bookArray = Object.values(bookings).filter((booking) => booking.spotId === +spotId)
+      bookArray.forEach((booking) => setDates((dates) => [...dates, ...disableRange(booking.startDate, booking.endDate)]))
     }
-
-  }, [bookings])
+  }, [bookings, spotId])
 
   useEffect(() => {
     dispatch(getSpotBookingsThunk(spotId))
@@ -31,26 +40,12 @@ export default function BookingModal({ spotId }) {
     }
   ]);
 
-  // console.log(state[0].startDate)
-  // console.log(state.endDate)
-
-  // const newDis = dis.reduce((accumulator, book) => {
-  //   return [...accumulator, ...disableRange(book.startDate, book.endDate)]
-  // }, [])
-
-
-
   const disableRange = (start, end) => {
-    const days = eachDayOfInterval({start, end})
-    return eachDayOfInterval({ start, end });
+      const newStart = new Date(start)
+      console.log('start', start)
+      console.log('newStart', newStart)
+      return eachDayOfInterval({ start, end });
   };
-
-  const disabledDates = [
-    ...disableRange(new Date(2024, 9, 1), new Date(2024, 9, 5)), // Disables from Nov 1 to Nov 5, 2024
-    ...disableRange(addDays(new Date(), 10), addDays(new Date(), 15)), // Disables 10 to 15 days from now
-  ];
-
-
 
   return <>
     <DateRange
@@ -58,7 +53,7 @@ export default function BookingModal({ spotId }) {
       onChange={item => setState([item.selection])}
       moveRangeOnFirstSelection={false}
       ranges={state}
-      disabledDates={disabledDates}
+      disabledDates={dates}
     />
   </>
 }
