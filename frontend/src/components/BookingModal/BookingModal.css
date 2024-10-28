@@ -1,0 +1,16 @@
+.booking-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin: 10px
+}
+
+.button-container{
+  display: flex;
+  gap: 10px;
+}
+
+.date-picker button:hover {
+  background-color: white;
+}

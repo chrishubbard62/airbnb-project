@@ -5,11 +5,30 @@ import { DateRange } from "react-date-range"
 import { eachDayOfInterval } from 'date-fns'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
+import './BookingModal.css'
+import { createBookingThunk } from "../../store/bookings"
 
 export default function BookingModal({ spotId }) {
   const dispatch = useDispatch()
   const bookings = useSelector(state => state.bookings)
   const [dates, setDates] = useState([])
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
+    }
+  ]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(state[0])
+    const booking = {
+      startDate: state[0].startDate,
+      endDate: state[0].endDate
+    }
+    dispatch(createBookingThunk(spotId, booking))
+  }
 
   /*
   1) thunk bookings and grab from store
@@ -19,7 +38,6 @@ export default function BookingModal({ spotId }) {
   5) spread that array of date objects into the disabled day array
   6) add the disabled day array to the disable dates prop
   */
-
 
   useEffect(() => {
     if(bookings) {
@@ -32,28 +50,23 @@ export default function BookingModal({ spotId }) {
     dispatch(getSpotBookingsThunk(spotId))
   }, [dispatch, spotId])
 
-  const [state, setState] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: 'selection'
-    }
-  ]);
-
   const disableRange = (start, end) => {
-      const newStart = new Date(start)
-      console.log('start', start)
-      console.log('newStart', newStart)
       return eachDayOfInterval({ start, end });
   };
 
-  return <>
+  return <div className="booking-modal">
     <DateRange
+      className="date-picker"
       editableDateInputs={true}
       onChange={item => setState([item.selection])}
       moveRangeOnFirstSelection={false}
       ranges={state}
       disabledDates={dates}
     />
-  </>
+    <div className="button-container">
+    <button onClick={handleSubmit}>submit</button>
+    <button>cancel</button>
+    </div>
+
+  </div>
 }
