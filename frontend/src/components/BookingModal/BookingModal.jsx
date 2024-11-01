@@ -7,11 +7,16 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import './BookingModal.css'
 import { createBookingThunk } from "../../store/bookings"
+import { useModal } from "../../context/Modal"
+import { Navigate } from "react-router-dom"
 
 export default function BookingModal({ spotId }) {
   const dispatch = useDispatch()
+  const {closeModal} = useModal();
+
   const bookings = useSelector(state => state.bookings)
   const [dates, setDates] = useState([])
+  const [bookingSuccess, setBookingSuccess] = useState(false)
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -20,15 +25,24 @@ export default function BookingModal({ spotId }) {
     }
   ]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
-    console.log(state[0])
     const booking = {
       startDate: state[0].startDate,
       endDate: state[0].endDate
     }
     dispatch(createBookingThunk(spotId, booking))
+    setBookingSuccess(true)
+    console.log('wtf' , bookingSuccess)
+    closeModal()
   }
+
+  useEffect(() => {
+    console.log(bookingSuccess)
+    if(bookingSuccess) {
+      console.log('FUCK')
+    }
+  },[bookingSuccess])
 
   /*
   1) thunk bookings and grab from store
@@ -67,6 +81,5 @@ export default function BookingModal({ spotId }) {
     <button onClick={handleSubmit}>submit</button>
     <button>cancel</button>
     </div>
-
   </div>
 }

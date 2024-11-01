@@ -12,6 +12,7 @@ export default function UserBookingPage() {
 
   useEffect(() => {
     dispatch(getUserBookingsThunk())
+    
   }, [dispatch])
 
   return (
