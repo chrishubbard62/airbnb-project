@@ -8,6 +8,7 @@ import './index.css'
 import SpotsContainer from './components/SpotsContainer';
 import SpotDetailsContainer from './components/SpotDetailsContainer';
 import SpotForm from './components/SpotForm';
+import UserBookingPage from './components/UserBookingContainer';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: '/spots/:id/edit',
         element: <SpotForm newSpot={false}/>
+      },
+      {
+        path: '/bookings/current',
+        element: <UserBookingPage />
       }
     ]
   }

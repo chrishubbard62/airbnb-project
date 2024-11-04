@@ -7,9 +7,12 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import './BookingModal.css'
 import { createBookingThunk } from "../../store/bookings"
+import { useModal } from "../../context/Modal"
 
-export default function BookingModal({ spotId }) {
+
+export default function BookingModal({ spotId, book }) {
   const dispatch = useDispatch()
+  const {closeModal} = useModal();
   const bookings = useSelector(state => state.bookings)
   const [dates, setDates] = useState([])
   const [state, setState] = useState([
@@ -20,14 +23,15 @@ export default function BookingModal({ spotId }) {
     }
   ]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault();
-    console.log(state[0])
     const booking = {
       startDate: state[0].startDate,
       endDate: state[0].endDate
     }
     dispatch(createBookingThunk(spotId, booking))
+    book(true)
+    closeModal()
   }
 
   /*
@@ -67,6 +71,5 @@ export default function BookingModal({ spotId }) {
     <button onClick={handleSubmit}>submit</button>
     <button>cancel</button>
     </div>
-
   </div>
 }

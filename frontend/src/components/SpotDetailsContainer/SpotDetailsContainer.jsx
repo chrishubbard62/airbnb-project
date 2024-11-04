@@ -6,7 +6,7 @@ import { getSpotDetailsThunk } from "../../store/spots";
 import ReviewsContainer from "../ReviewsContainer";
 import { FaStar } from "react-icons/fa";
 import OpenModalButton from "../OpenModalButton";
-
+import { useNavigate } from "react-router-dom";
 import './SpotDetails.css'
 import BookingModal from "../BookingModal";
 
@@ -18,6 +18,8 @@ function SpotDetailsContainer() {
   const dispatch = useDispatch();
   const spot = spotDetails[spotId]
   const [newReview, setNewReview] = useState(0);
+  const [BookingRedirect, setBookingBookingRedirect] = useState(false)
+  const navigate = useNavigate()
 
 
 
@@ -25,6 +27,13 @@ function SpotDetailsContainer() {
   useEffect(() => {
     dispatch(getSpotDetailsThunk(spotId))
   }, [dispatch, spotId, newReview, reviews])
+
+  useEffect(()=> {
+    if(BookingRedirect) {
+      navigate('/bookings/current')
+    }
+  }, [BookingRedirect, navigate])
+
   if (!spot || !spot.SpotImages) return <h2>Loading</h2>
 
 
@@ -58,7 +67,7 @@ function SpotDetailsContainer() {
           </div>
           <OpenModalButton
             buttonText={'Reserve'}
-            modalComponent={<BookingModal spotId={spotId}/>}
+            modalComponent={<BookingModal spotId={spotId} book={setBookingBookingRedirect}/>}
           />
         </div>
       </div>
