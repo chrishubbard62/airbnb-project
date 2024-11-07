@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { getUserBookingsThunk } from "../../store/bookings"
 import { useDispatch, useSelector } from "react-redux"
 import {format} from "date-fns"
+import BookingCard from "./BookingCard"
 
 
 
@@ -24,10 +25,8 @@ export default function UserBookingPage() {
     <div>
       <h2>Your current Bookings</h2>
       {userBookings.map(booking =>
-      <p key={booking.id}>{booking?.Spot?.name}
-        {" start: " + format(new Date(booking.startDate), 'MM/dd/yyyy')}
-       {" end: " + format(new Date(booking.endDate), 'MM/dd/yyyy')}
-       </p>)}
+       <BookingCard key={booking.id} booking={booking}/>
+        )}
     </div>
   )
 }
