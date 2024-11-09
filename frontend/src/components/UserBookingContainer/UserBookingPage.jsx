@@ -1,8 +1,8 @@
 import { useEffect } from "react"
 import { getUserBookingsThunk } from "../../store/bookings"
 import { useDispatch, useSelector } from "react-redux"
-import {format} from "date-fns"
 import BookingCard from "./BookingCard"
+import './BookingPage.css'
 
 
 
@@ -23,10 +23,14 @@ export default function UserBookingPage() {
 
   return (
     <div>
-      <h2>Your current Bookings</h2>
+      <h2 className="booking-title">Your current Bookings</h2>
+      <div className="booking-outer">
       {userBookings.map(booking =>
        <BookingCard key={booking.id} booking={booking}/>
         )}
+
+      </div>
+
     </div>
   )
 }
