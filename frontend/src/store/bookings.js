@@ -3,6 +3,14 @@ import { csrfFetch } from "./csrf"
 const GET_SPOT_BOOKINGS = 'bookings/getSpotBookings'
 const CREATE_BOOKING = 'bookings/createBooking'
 const GET_USER_BOOKINGS = 'bookings/getUserBookings'
+const DELETE_BOOKING = 'bookings/deleteBooking'
+
+const deleteBooking = (payload) => {
+  return {
+    type: DELETE_BOOKING,
+    payload
+  }
+}
 
 const getSpotBookings = (payload) => {
   return {
@@ -52,6 +60,17 @@ export const getUserBookingsThunk = () => async (dispatch) => {
   if(res.ok) {
     const data = await res.json()
     dispatch(getUserBookings(data.Bookings))
+  }
+}
+
+export const deleteBookingThunk = (id) => async (dispatch) => {
+  const res = await csrfFetch(`/api/bookings/${id}`, {
+    method: 'DELETE'
+  })
+  if(res.ok) {
+    const deleted = await res.json()
+    dispatch(deleteBooking(id))
+    return deleted
   }
 }
 

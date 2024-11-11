@@ -29,7 +29,7 @@ function SpotCard(props) {
       <div className='button-box'>
        <button className='update-delete' onClick={handleUpdate}>Update</button>
        <OpenModalButton className='update-delete'
-        modalComponent={<DeleteModal spotId={spotId} deleteType={'Spot'}/>}
+        modalComponent={<DeleteModal spotId={spotId} deleteType={'spot'}/>}
         buttonText={'Delete'}
         />
       </div>

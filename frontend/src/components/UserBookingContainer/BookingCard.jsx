@@ -1,5 +1,8 @@
 import { format } from "date-fns"
 import './BookingPage.css'
+import OpenModalButton from "../OpenModalButton"
+import DeleteModal from "../DeleteModal"
+
 
 export default function BookingCard({ booking }) {
   return (
@@ -11,9 +14,12 @@ export default function BookingCard({ booking }) {
           {" end: " + format(new Date(booking.endDate), 'MM/dd/yyyy')}
         </p>
       </div>
-      <div>
+      <div className="button-container">
         <button>Edit</button>
-        <button>Delete</button>
+        <OpenModalButton
+          buttonText={'Delete'}
+          modalComponent={<DeleteModal bookingId={booking.id} deleteType={'booking'}/>}
+        />
       </div>
     </div>
 

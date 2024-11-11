@@ -14,7 +14,6 @@ export default function UserBookingPage() {
 
   useEffect(() => {
     dispatch(getUserBookingsThunk())
-
   }, [dispatch])
 
   if(!userBookings) {
@@ -28,7 +27,6 @@ export default function UserBookingPage() {
       {userBookings.map(booking =>
        <BookingCard key={booking.id} booking={booking}/>
         )}
-
       </div>
 
     </div>

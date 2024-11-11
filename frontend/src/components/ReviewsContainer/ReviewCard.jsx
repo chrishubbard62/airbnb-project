@@ -17,7 +17,7 @@ function ReviewCard({review}) {
       <p className="review-text">{review.review}</p>
       {session.user?.id === review.User.id &&
       <OpenModalButton
-        modalComponent={<DeleteModal reviewId={review.id} deleteType={'Review'}/>}
+        modalComponent={<DeleteModal reviewId={review.id} deleteType={'review'}/>}
         buttonText={'Delete'}
       />}
       <hr />
