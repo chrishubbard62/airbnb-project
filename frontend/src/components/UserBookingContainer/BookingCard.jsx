@@ -18,7 +18,7 @@ export default function BookingCard({ booking }) {
         <button>Edit</button>
         <OpenModalButton
           buttonText={'Delete'}
-          modalComponent={<DeleteModal bookingId={booking.id} deleteType={'booking'}/>}
+          modalComponent={<DeleteModal startDate={booking.startDate} bookingId={booking.id} deleteType={'booking'}/>}
         />
       </div>
     </div>

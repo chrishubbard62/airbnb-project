@@ -7,10 +7,9 @@ import './DeleteModal.css'
 
 
 function DeleteModal(props) {
-  const {spotId, deleteType, reviewId, bookingId} = props;
+  const {spotId, deleteType, reviewId, bookingId, startDate} = props;
   const dispatch = useDispatch();
   const {closeModal} = useModal();
-
   const handleNo = () => {
     closeModal();
   }
@@ -21,6 +20,13 @@ function DeleteModal(props) {
     } else if (deleteType === 'review'){
       dispatch(deleteReviewThunk(reviewId))
     } else {
+      const today = new Date()
+      const start = new Date(startDate)
+      if(start < today) {
+        alert('Cannot delete a booking that is in progress')
+        closeModal()
+        return
+      }
       dispatch(deleteBookingThunk(bookingId))
     }
     closeModal();
