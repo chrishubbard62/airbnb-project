@@ -2,7 +2,7 @@ import { format } from "date-fns"
 import './BookingPage.css'
 import OpenModalButton from "../OpenModalButton"
 import DeleteModal from "../DeleteModal"
-
+import BookingModal from "../BookingModal"
 
 export default function BookingCard({ booking }) {
   return (
@@ -15,7 +15,11 @@ export default function BookingCard({ booking }) {
         </p>
       </div>
       <div className="button-container">
-        <button>Edit</button>
+        <OpenModalButton
+          buttonText={'Edit'}
+          type={'update'}
+          modalComponent={<BookingModal />}
+        />
         <OpenModalButton
           buttonText={'Delete'}
           modalComponent={<DeleteModal startDate={booking.startDate} bookingId={booking.id} deleteType={'booking'}/>}

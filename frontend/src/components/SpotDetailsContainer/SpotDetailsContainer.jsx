@@ -20,7 +20,7 @@ function SpotDetailsContainer() {
   const [newReview, setNewReview] = useState(0);
   const [BookingRedirect, setBookingBookingRedirect] = useState(false)
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     dispatch(getSpotDetailsThunk(spotId))
   }, [dispatch, spotId, newReview, reviews])
@@ -61,7 +61,7 @@ function SpotDetailsContainer() {
           </div>
           <OpenModalButton
             buttonText={'Reserve'}
-            modalComponent={<BookingModal spotId={spotId} book={setBookingBookingRedirect}/>}
+            modalComponent={<BookingModal type={'new'} spotId={spotId} book={setBookingBookingRedirect}/>}
           />
         </div>
       </div>

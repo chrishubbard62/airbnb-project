@@ -5,7 +5,6 @@ import BookingCard from "./BookingCard"
 import './BookingPage.css'
 
 
-
 export default function UserBookingPage() {
   const dispatch = useDispatch()
   const bookings = useSelector(state => state.bookings)
@@ -28,7 +27,6 @@ export default function UserBookingPage() {
        <BookingCard key={booking.id} booking={booking}/>
         )}
       </div>
-
     </div>
   )
 }
